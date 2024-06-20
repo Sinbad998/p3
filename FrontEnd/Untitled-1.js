@@ -1,14 +1,13 @@
-
+//Faites l’appel à l’API avec fetch afin de récupérer dynamiquement les projets de l’architecte.
 async function getProjectsByArchitect(architectId) {
   const url = `http://localhost:5678/api/works`;
   const response = await fetch(url);
   const data = await response.json();
   return data;
 }
+//Utilisez JavaScript pour ajouter à la galerie les travaux de l’architecte que vous avez récupéré.
 function renderCards(projects){
-  //console.log("galleryContainer")
   const galleryContainer = document.querySelector('.gallery')
-  //console.log(galleryContainer)
   console.log(projects)
   projects.forEach((item,i) => {
     let figure = document.createElement('figure')
@@ -40,61 +39,34 @@ async function categories() {
   const response = await fetch(url);
   const data = await response.json();
   const div = document.createElement("div")
-
-  const buttonTous = document.createElement("button")
-  buttonTous.textContent = "Tous"
-  div.append(buttonTous)
-  buttonTous.addEventListener( "mouseover" , (event) => {
-    event.target.style.color = "green";
-  });
-
-  buttonTous.addEventListener( "mouseout" , (event) => {
-    event.target.style.color = "";
-  });
-
-  const buttonObjet = document.createElement("button");
-  buttonObjet.textContent = "Objet";
-  div.append(buttonObjet);
-  buttonObjet.addEventListener( "mouseover" , (event) => {
-    event.target.style.color = "green";
-  });
-
-  buttonObjet.addEventListener( "mouseout" , (event) => {
-    event.target.style.color = "";
-  });
-
-
-  const buttonAppartements = document.createElement("button");
-  buttonAppartements.textContent = "Appartements";
-  div.append(buttonAppartements);
-  buttonAppartements.addEventListener( "mouseover" , (event) => {
-    event.target.style.color = "green";
-  });
-
-  buttonAppartements.addEventListener( "mouseout" , (event) => {
-    event.target.style.color = "";
-  });
-
-  const buttonHotel = document.createElement("button");
-  buttonHotel.textContent = "Hotel & Restaurants";
-  div.append(buttonHotel);
-  buttonHotel.addEventListener( "mouseover" , (event) => {
-    event.target.style.color = "green";
-  });
-
-  buttonHotel.addEventListener( "mouseout" , (event) => {
-    event.target.style.color = "";
-  });
-
+  const button = document.createElement("button")
+  button.textContent = "Tous"
+  div.append(button)
   const divcontainer = document.querySelector("#portfolio h2")
   divcontainer.append(div)
-  data.forEach
+  //console.log(data)
+
+data.forEach(element => {
+    const categoryId = element.categoryId;
+    const categoryBtn = document.createElement("button");
+     // Check if categoryId is 1
+  if (categoryId === 1) {
+    categoryBtn.textContent = "Objet"; 
+  } else if (categoryId === 2){
+    categoryBtn.textContent = `Appartements`;
+  } else {
+    categoryBtn.textContent = `Hotel & Restaurants`;
+  }
+
+    div.append(categoryBtn);
+  });
+
+  console.log(button)
 }
 
-
-
-
-
+//data.forEach(categoryId => {
+  //const categoryId
+//})
 const cats = categories()
 console.log(cats)
 
