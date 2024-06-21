@@ -35,7 +35,7 @@ getProjectsByArchitect(architectId)
 });
 
 async function categories() {
-  const url = `http://localhost:5678/api/works`;
+  const url = `http://localhost:5678/api/categories`;
   const response = await fetch(url);
   const data = await response.json();
   const div = document.createElement("div")
@@ -47,6 +47,7 @@ async function categories() {
   //console.log(data)
 
 data.forEach(element => {
+  
     const categoryId = element.categoryId;
     const categoryBtn = document.createElement("button");
      // Check if categoryId is 1
@@ -69,6 +70,10 @@ data.forEach(element => {
 //})
 const cats = categories()
 console.log(cats)
+
+
+
+
 
 
 
