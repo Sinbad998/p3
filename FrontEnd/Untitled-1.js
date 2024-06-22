@@ -6,14 +6,16 @@ async function getProjectsByArchitect(architectId) {
   return data;
 }
 //Utilisez JavaScript pour ajouter à la galerie les travaux de l’architecte que vous avez récupéré.
-function renderCards(projects){
+function renderCards(projects) {
   const galleryContainer = document.querySelector('.gallery')
   console.log(projects)
-  projects.forEach((item,i) => {
+//boucle pour creer une figure et une image pour chaque item dans projects
+  projects.forEach((item, i) => {
     let figure = document.createElement('figure')
-    , img = document.createElement('img')
+      , img = document.createElement('img')
+//
     figure.setAttribute("data-categoryId", item.categoryId)
-    
+
 
     img.src = item.imageUrl
     //console.log(galleryContainer)
@@ -27,14 +29,15 @@ function renderCards(projects){
 // Exemple d'utilisation
 const architectId = 123;
 getProjectsByArchitect(architectId)
-.then(projects => {
-  //console.log(projects);
-  renderCards(projects)
-})
-.catch(error => {
-  console.log(error);
-});
+  .then(projects => {
 
+    renderCards(projects)
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+//Appel à l’API avec fetch afin de récupérer dynamiquement les differentes categories.
 async function categories() {
   const url = `http://localhost:5678/api/categories`;
   const response = await fetch(url);
@@ -47,30 +50,28 @@ async function categories() {
   divcontainer.append(div)
   //console.log(data)
 
+//boucle pour recuperer chaque id dans le tableau data puis creation de bouton associer
   data.forEach(element => {
-
-    // const categoryId = element.categoryId;
     const categoryId = element.id;
     const categoryBtn = document.createElement("button");
     categoryBtn.textContent = element.name
-    categoryBtn.addEventListener ( "click",(event) => {
-      alert (event.target)
-    const worksItem = document.querySelectorAll(".gallery figure")
-    worksItem.forEach(element2 => {
-      console.log(element.name)
-      console.log(element.id)
-      console.log(element2.dataset.categoryId)
-      if (element.id !== element2.dataset.categoryId){
-        element2.style= "display : none"
-      }
-      
-      
-    });
-    
-    }
-
-    )
-
+//creation d'evenement click qui selectionne toutes les figure dans .figure
+    categoryBtn.addEventListener("click", (event) => {
+      //alert (event.target)
+      const worksItem = document.querySelectorAll(".gallery figure")
+//boucle pour que chaque element de workItem est supprime chaque style
+      worksItem.forEach(element2 => {
+        element2.style = ""
+      })
+//Boucle qui regarde tout les element de workItem
+      worksItem.forEach(element2 => {
+//condition si l'element.id n'est pas égal à element2.dataset.categoryId ceci ne s'affiche pas 
+        if (element.id !== parseInt(element2.dataset.categoryid)) {
+          element2.style = "display : none"
+        }
+      });
+   })
+   
     div.append(categoryBtn);
   });
 
@@ -78,7 +79,7 @@ async function categories() {
 }
 
 //data.forEach(categoryId => {
-  //const categoryId
+//const categoryId
 //})
 const cats = categories()
 console.log(cats)
