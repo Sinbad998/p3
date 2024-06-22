@@ -12,6 +12,7 @@ function renderCards(projects){
   projects.forEach((item,i) => {
     let figure = document.createElement('figure')
     , img = document.createElement('img')
+    figure.setAttribute("data-categoryId", item.categoryId)
     
 
     img.src = item.imageUrl
@@ -46,18 +47,29 @@ async function categories() {
   divcontainer.append(div)
   //console.log(data)
 
-data.forEach(element => {
-  
-    const categoryId = element.categoryId;
+  data.forEach(element => {
+
+    // const categoryId = element.categoryId;
+    const categoryId = element.id;
     const categoryBtn = document.createElement("button");
-     // Check if categoryId is 1
-  if (categoryId === 1) {
-    categoryBtn.textContent = "Objet"; 
-  } else if (categoryId === 2){
-    categoryBtn.textContent = `Appartements`;
-  } else {
-    categoryBtn.textContent = `Hotel & Restaurants`;
-  }
+    categoryBtn.textContent = element.name
+    categoryBtn.addEventListener ( "click",(event) => {
+      alert (event.target)
+    const worksItem = document.querySelectorAll(".gallery figure")
+    worksItem.forEach(element2 => {
+      console.log(element.name)
+      console.log(element.id)
+      console.log(element2.dataset.categoryId)
+      if (element.id !== element2.dataset.categoryId){
+        element2.style= "display : none"
+      }
+      
+      
+    });
+    
+    }
+
+    )
 
     div.append(categoryBtn);
   });
