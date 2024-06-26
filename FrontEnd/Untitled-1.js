@@ -45,6 +45,13 @@ async function categories() {
   const div = document.createElement("div")
   const button = document.createElement("button")
   button.textContent = "Tous"
+  button.addEventListener("click", (event) =>{
+    const worksItem = document.querySelectorAll(".gallery figure")
+//boucle pour que chaque element de workItem est supprime chaque style
+      worksItem.forEach(element2 => {
+        element2.style = ""
+      })
+  })
   div.append(button)
   const divcontainer = document.querySelector("#portfolio h2")
   divcontainer.append(div)
