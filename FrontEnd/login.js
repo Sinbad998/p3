@@ -16,4 +16,8 @@ form.addEventListener("submit" , (event) =>{
     console.log(password.value);
 })
 
-
+async function login() {
+    const url = `http://localhost:5678/api/users/login`,  methode : "post";
+    const response = await fetch(url);
+    const data = await response.json();
+}
