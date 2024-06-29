@@ -67,8 +67,8 @@ async function categories() {
       //alert (event.target)
       const worksItem = document.querySelectorAll(".gallery figure")
 //boucle pour que chaque element de workItem est supprime chaque style
-      worksItem.forEach(element2 => {
-        element2.style = ""
+      worksItem.forEach(element => {
+        element.style = ""
       })
 //Boucle qui regarde tout les element de workItem
       worksItem.forEach(element2 => {
