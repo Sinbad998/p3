@@ -15,6 +15,29 @@ window.addEventListener("load", (event)=> {
       //button.style.display = "none"
     //})
   //}
+  const mesProjets = document.querySelector('#portfolio h2');
+  const ModifBtn = document.createElement("button");
+  ModifBtn.textContent="Modifier";
+  mesProjets.appendChild(ModifBtn)
+  ModifBtn.addEventListener("click", (event) =>{
+
+
+  function renderCards(projects) {
+  const galleryContainer = document.querySelector('.gallery')
+  projects.forEach((item, i) => {
+    let figure = document.createElement('figure')
+    img = document.createElement('img')
+//
+    figure.setAttribute("data-categoryId", item.categoryId)
+    
+    
+    img.src = item.imageUrl
+    figure.append(img)
+    galleryContainer.append(figure)
+  })
+}
+  })
+
   }else {
     alert("pas connecter")
   
@@ -34,7 +57,7 @@ function renderCards(projects) {
 //boucle pour creer une figure et une image pour chaque item dans projects
   projects.forEach((item, i) => {
     let figure = document.createElement('figure')
-    , img = document.createElement('img')
+    img = document.createElement('img')
 //
     figure.setAttribute("data-categoryId", item.categoryId)
     
