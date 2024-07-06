@@ -20,23 +20,11 @@ window.addEventListener("load", (event)=> {
   ModifBtn.textContent="Modifier";
   mesProjets.appendChild(ModifBtn)
   ModifBtn.addEventListener("click", (event) =>{
-
-
-  function renderCards(projects) {
-  const galleryContainer = document.querySelector('.gallery')
-  projects.forEach((item, i) => {
-    let figure = document.createElement('figure')
-    img = document.createElement('img')
-//
-    figure.setAttribute("data-categoryId", item.categoryId)
-    
-    
-    img.src = item.imageUrl
-    figure.append(img)
-    galleryContainer.append(figure)
-  })
-}
-  })
+    const modale = document.getElementById('modale1');
+    function ouvertureModale () {
+      modale.style.display = "block";
+  }
+})
 
   }else {
     alert("pas connecter")
@@ -57,7 +45,7 @@ function renderCards(projects) {
 //boucle pour creer une figure et une image pour chaque item dans projects
   projects.forEach((item, i) => {
     let figure = document.createElement('figure')
-    img = document.createElement('img')
+    , img = document.createElement('img')
 //
     figure.setAttribute("data-categoryId", item.categoryId)
     
