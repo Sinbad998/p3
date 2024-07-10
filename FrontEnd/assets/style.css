@@ -23,6 +23,8 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+*{box-sizing: border-box;}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -62,7 +64,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1:not(.modal h1){
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -78,7 +80,7 @@ h1 > span {
 ;
 }
 
-h2{
+h2:not(.modal h2){
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
@@ -217,7 +219,7 @@ label {
     /*justify-content: center;*/
 }
 
-main h1{
+main h1:not(.modal h1){
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -229,7 +231,7 @@ main h1{
 	margin-bottom: 1em;
 }
 
-main h3 {
+main h3:not(.modal h3) {
 	margin-top: 2em;
 	margin-left: 440px;
 	color: black;
@@ -252,3 +254,38 @@ form button {
 	color: whitesmoke;
 }
 
+.modeedition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3em;
+    /* bottom: 0; */
+    background-color: black;
+    color: white;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper{
+	max-width: calc(100vh - 20px);
+	max-height: calc(100vh - 20px);
+	width: 600px;
+	overflow: auto;
+	padding: 20px;
+	background-color: #fff;
+}
