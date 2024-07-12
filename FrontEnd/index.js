@@ -23,15 +23,10 @@ window.addEventListener("load", (event) => {
     //mesProjets.appendChild(ModifBtn)
 
     //afficher le bouton modifier avec le contenu de la modale
-    const ModifBtn = `<div class = "modal1">
-    <a href = #modal1 class="js-modal">Modifier</a>
-    <aside id="modal1" class="modal" aria-hidden="true" role="dialog" style="display:none"> 
-    <div class ="modal-wrapper js-modal-stop">
-    <h1>Galerie photo</h1>
-    </div>
-    </aside>`
-    document.querySelector("#portfolio h2").insertAdjacentHTML("afterend", ModifBtn)
 
+
+    //const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
+    
     // Fonction pour afficher la modale et ajout d'evenement
     const ouvrirmodal = function (e) {
       e.preventDefault()
@@ -39,21 +34,22 @@ window.addEventListener("load", (event) => {
       target.style.display = null
       target.setAttribute("aria-hidden", false)
       modal = target
-      modal.addEventListener("click", closemodal)
+      console.log(modal)
+      // modal.addEventListener("click", closemodal)
+
       //modal.querySelector("js-modal-close").addEventListener("click", closemodal)
       //const modalBtn = document.querySelector("js-modal-close");
       modal.addEventListener('click', async () => {
-       try {
-        ouvrirmodal();
-        await categories()
-       } catch (error){
-        console.error('Erreur')
-       }
+        try {
+          ouvrirmodal();
+          await categories()
+        } catch (error) {
+          console.error('Erreur')
+        }
       });
       //modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     }
 
-    ModifBtn
     // Fonction pour fermer la modale et suppression des evenements
     const closemodal = function (e) {
       if (modal === null) return
@@ -64,21 +60,21 @@ window.addEventListener("load", (event) => {
       modal = null
     }
     // pour bloquer la propagation de l'evenement
-    const stopPropagation = function (e) {
-      e.stopPropagation()
-    }
+    // const stopPropagation = function (e) {
+    //   e.stopPropagation()
+    // }
 
     //
-    document.querySelectorAll(".js-modal").forEach(a => {
-      a.addEventListener("click", ouvrirmodal)
+    // document.querySelectorAll(".js-modal").forEach(a => {
+    //   a.addEventListener("click", ouvrirmodal)
 
-    })
+    // })
     // evements sur la page qui ecoute le clavier 
-    window.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closemodal(e)
-      }
-    })
+    // window.addEventListener("keydown", function (e) {
+    //   if (e.key === "Escape") {
+    //     closemodal(e)
+    //   }
+    // })
 
 
 
@@ -145,10 +141,13 @@ getProjectsByArchitect(architectId)
   .then(projects => {
 
     renderCards(projects)
+    renderModalCards(projects)
   })
   .catch(error => {
     console.log(error);
   });
+
+
 
 //Appel à l’API avec fetch afin de récupérer dynamiquement les differentes categories.
 async function categories() {
@@ -199,6 +198,40 @@ async function categories() {
   console.log(button)
 }
 
+const modal_template = `
+<aside id="modal"> 
+  <div class ="modal-wrapper">
+    <h1>Galerie photo</h1>
+    <div class="modal-galerie">
+    </div>
+  </div>
+</aside>`
+// document.querySelector("#portfolio h2").insertAdjacentHTML("afterend", ModifBtn)
+document.body.insertAdjacentHTML("beforeend", modal_template)
+document.querySelector("#portfolio h2").innerHTML += `<span id="modal_btn">Modifier</span>`
+document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
+modal.classList.add("on")
+})
+modal.addEventListener('click', e => [
+e.target.classList.remove("on")
+])
+
+function renderModalCards(projects) {
+  const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
+ 
+  projects.forEach((item, i) => {
+    let figure = document.createElement('figure')
+      , img = document.createElement('img')
+
+    figure.setAttribute("data-categoryId", item.categoryId)
+
+    img.src = item.imageUrl
+
+    figure.append(img)
+    imageTravauxWrapper.append(figure)
+
+  })
+}
 
 
 //data.forEach(categoryId => {
@@ -206,11 +239,3 @@ async function categories() {
 //})
 //const cats = categories()
 //console.log(cats)
-
-
-
-
-
-
-
-
