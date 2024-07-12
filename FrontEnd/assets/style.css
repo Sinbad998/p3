@@ -289,3 +289,9 @@ form button {
 	padding: 20px;
 	background-color: #fff;
 }
+
+.modal1 a{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

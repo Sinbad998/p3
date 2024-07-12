@@ -53,6 +53,7 @@ window.addEventListener("load", (event) => {
       //modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     }
 
+    ModifBtn
     // Fonction pour fermer la modale et suppression des evenements
     const closemodal = function (e) {
       if (modal === null) return
