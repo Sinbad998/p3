@@ -62,17 +62,17 @@ window.addEventListener("load", (event) => {
       modal.removeEventListener("click", closemodal)
       modal = null
     }
-
+    // pour bloquer la propagation de l'evenement
     const stopPropagation = function (e) {
       e.stopPropagation()
     }
 
-
+    //
     document.querySelectorAll(".js-modal").forEach(a => {
       a.addEventListener("click", ouvrirmodal)
 
     })
-
+    // evements sur la page qui ecoute le clavier 
     window.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         closemodal(e)
