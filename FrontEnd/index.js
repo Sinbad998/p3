@@ -31,7 +31,7 @@ window.addEventListener("load", (event) => {
     </div>
     </aside>`
     document.querySelector("#portfolio h2").insertAdjacentHTML("afterend", ModifBtn)
-    
+
     // Fonction pour afficher la modale et ajout d'evenement
     const ouvrirmodal = function (e) {
       e.preventDefault()
@@ -39,22 +39,27 @@ window.addEventListener("load", (event) => {
       target.style.display = null
       target.setAttribute("aria-hidden", false)
       modal = target
-      modal.addEventListener("click" , closemodal)
+      modal.addEventListener("click", closemodal)
       //modal.querySelector("js-modal-close").addEventListener("click", closemodal)
       //const modalBtn = document.querySelector("js-modal-close");
-      modal.addEventListener('click' , ()=>{
-        
+      modal.addEventListener('click', async () => {
+       try {
+        ouvrirmodal();
+        await categories()
+       } catch (error){
+        console.error('Erreur')
+       }
       });
       //modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     }
 
-  // Fonction pour fermer la modale et suppression des evenements
+    // Fonction pour fermer la modale et suppression des evenements
     const closemodal = function (e) {
       if (modal === null) return
       e.preventDefault()
       modal.style.display = "none"
       modal.setAttribute("aria-hidden", true)
-      modal.removeEventListener("click" , closemodal)
+      modal.removeEventListener("click", closemodal)
       modal = null
     }
 
@@ -68,13 +73,13 @@ window.addEventListener("load", (event) => {
 
     })
 
-    window.addEventListener("keydown", function(e){
-      if (e.key ==="Escape"){
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
         closemodal(e)
       }
     })
 
-    
+
 
 
 

@@ -28,6 +28,7 @@ form.addEventListener("submit", (event) => {
         .then(data => {
             console.log(data)
             if (data.token) {
+                
                 localStorage.token = data.token
                 //renvoie vers la page index.html si le token est bon
                 location.href = "index.html"
