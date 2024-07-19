@@ -3,49 +3,175 @@
    License: none (public domain)
 */
 
-.on{
-    display: flex;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .5);
-    justify-content: center;
-    padding: 2em 0;
+.trash{
+	height: 15px;
+	width: 10px;
+	border: none;
+	
 }
 
-.modal-wrapper{
+.Ajout {
+	width: 237px;
+	height: 36px;
+	top: 1267px;
+	left: 600px;
+	gap: 0px;
+	border-radius: 60px 60px 60px 60px;
+	opacity: 0px;
+	background-color: #1D6154;
+	color: white;
+	margin-top: 1em;
+}
+
+.MDP{
+	display: flex;
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.on {
+	display: flex;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .5);
+	justify-content: center;
+	padding: 2em 0;
+}
+
+.modal-wrapper {
 	display: flex;
 	flex-wrap: wrap;
+	gap: 1em;
 }
 
-.modal-galerie figure img{
-	width: 100px;
-	/*display: flex;*/
-	/*flex-direction: row;*/
+.modal-wrapper h1 {
+	padding: 10px;
+	justify-content: center;
+	font-size: 1.5em;
+}
+
+.modal-galerie figure img {
+	width: 90px;
 	flex-wrap: wrap;
 }
 
 .modal-galerie {
-    flex-wrap: wrap;
-    display: flex;
+	flex-wrap: wrap;
+	display: flex;
 	gap: 1em;
+	margin-bottom: 2em;
+
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+span#modal_btn {
+	color: grey;
+	margin-left: 20px;
+	font-size: 11px;
+}
+
+/* pour la page login*/
+main h2 {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+.login {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.h4 a {
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -54,47 +180,71 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-*{box-sizing: border-box;}
+* {
+	box-sizing: border-box;
+}
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
 
-h1:not(#modal h1){
+h1:not(#modal h1) {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -103,25 +253,27 @@ h1:not(#modal h1){
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2:not(.modal h2){
+h2:not(.modal h2) {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -130,13 +282,16 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -146,6 +301,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -153,10 +309,17 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+	margin-left: 2em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -169,20 +332,24 @@ li:hover {
 	width: 100%;
 
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -193,23 +360,25 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -218,8 +387,8 @@ footer nav ul {
 	margin: 2em
 }
 
-a{
-border: none;
+a {
+	border: none;
 }
 
 /*formulaire*/
@@ -228,7 +397,7 @@ border: none;
 #FormulaireLogin {
 	display: flex;
 	flex-direction: column;
-	width: 30%;
+	width: 40%;
 	gap: 1em;
 	margin: 0 auto
 }
@@ -236,20 +405,21 @@ border: none;
 input#email {
 	padding: 1em;
 	box-shadow: 3px 3px 3px 3px grey;
-    border: white;
+	border: white;
 }
+
 input#password {
-    padding: 1em;
+	padding: 1em;
 	box-shadow: 3px 3px 3px 3px grey;
-    border: white;
+	border: white;
 }
 
 label {
-    display: flex;
-    /*justify-content: center;*/
+	display: flex;
+	/*justify-content: center;*/
 }
 
-main h1:not(.modal h1){
+main h1:not(.modal h1) {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -267,39 +437,43 @@ main h3:not(.modal h3) {
 	color: black;
 }
 
+main h3:not(.login h3) {
+	margin-top: 2em;
+	margin-left: 440px;
+	color: black;
+}
+
 h3 a {
 	color: black;
 	margin-left: 15px;
 }
 
 form button {
-    border-radius: 15px 15px 15px 15px;
-    margin-top: 1em;
-	background-color: green;
-	margin-left: 70px;
-	margin-right: 70px;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	font-size: 17px;
+	border-radius: 60px 60px 60px 60px;
+	margin-top: 1em;
+	background-color: #1D6154;
 	color: whitesmoke;
+	width: 237px;
+	margin-left: 107px;
+	justify-content: center;
 }
 
 .modeedition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3em;
-    /* bottom: 0; */
-    background-color: black;
-    color: white;
-    /* text-align: center; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3em;
+	/* bottom: 0; */
+	background-color: black;
+	color: white;
+	/* text-align: center; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.modal{
+.modal {
 	position: fixed;
 	display: flex;
 	align-items: center;
@@ -311,16 +485,17 @@ form button {
 	background: rgba(0, 0, 0, 0.8);
 }
 
-.modal-wrapper{
-	max-width: calc(100vh - 20px);
+.modal-wrapper {
+	max-width: calc(120vh - 10px);
 	max-height: calc(100vh - 20px);
 	width: 600px;
 	overflow: auto;
-	padding: 20px;
+	padding: 45px;
 	background-color: #fff;
+	justify-content: center;
 }
 
-.modal1 a{
+.modal1 a {
 	display: flex;
 	justify-content: center;
 	align-items: center;

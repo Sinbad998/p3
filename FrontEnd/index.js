@@ -92,6 +92,7 @@ window.addEventListener("load", (event) => {
     //changer le bouton en logout
     const BtnLogout = document.querySelector("li:nth-child(3)");
     BtnLogout.textContent = "Logout";
+    //vide le localstorage et renvoi à la meme page
     BtnLogout.addEventListener("click", () => {
       localStorage.clear()
       location.href = ""
@@ -198,6 +199,7 @@ async function categories() {
   console.log(button)
 }
 
+// variable qui integre du code html pour une modale et l'integres a l'index.html
 const modal_template = `
 <aside id="modal"> 
   <div class ="modal-wrapper">
@@ -206,12 +208,13 @@ const modal_template = `
     </div>
   </div>
 </aside>`
-// document.querySelector("#portfolio h2").insertAdjacentHTML("afterend", ModifBtn)
+
 document.body.insertAdjacentHTML("beforeend", modal_template)
 document.querySelector("#portfolio h2").innerHTML += `<span id="modal_btn">Modifier</span>`
 document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
 modal.classList.add("on")
 })
+// evenement sur la modale au click qui on enleve la class "on"
 modal.addEventListener('click', e => [
 e.target.classList.remove("on")
 ])
@@ -221,17 +224,57 @@ function renderModalCards(projects) {
  
   projects.forEach((item, i) => {
     let figure = document.createElement('figure')
-      , img = document.createElement('img')
+    img = document.createElement('img')
 
     figure.setAttribute("data-categoryId", item.categoryId)
 
     img.src = item.imageUrl
-
+    
     figure.append(img)
     imageTravauxWrapper.append(figure)
-
   })
 }
+
+
+const ajoutBtn = document.createElement('button');
+ajoutBtn.textContent="Ajouter une photo";
+ajoutBtn.classList.add('Ajout')
+
+const buttonContainer = document.querySelector('.modal-wrapper');
+buttonContainer.appendChild(ajoutBtn); 
+
+ajoutBtn.addEventListener("click", ()=>{
+  const figure = document.querySelectorAll('figure');
+
+  figure.forEach((item, i) => { 
+    const button = document.createElement('button'); 
+    button.textContent = "\u{1F5D1}"
+    button.classList.add('trash')
+    figure[i].append(button); 
+  
+    console.log(button); 
+    
+    fetch("http://localhost:5678/api/works" ,{
+      method: "DELETE",
+      headers: {"Accept" : "*/*" },
+    })
+    
+    .then(response =>{
+      if (response.ok){
+        console.log("Travaux supprimer correctement"); 
+      }else{
+        console.error("Erreur travaux non supprimer", response.status);
+      }
+    })
+    .catch(error =>{
+      console.error("Erreur envoi de la requete DELETE", error);
+    });
+  })
+  
+  }
+)
+
+
 
 
 //data.forEach(categoryId => {
