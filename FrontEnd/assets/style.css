@@ -3,11 +3,56 @@
    License: none (public domain)
 */
 
+.modal-galerie figure{
+	position: relative;
+}
+
+input[type="text"] {
+    padding: 7px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+	width: 70%;
+	margin-top: 10em;
+}
+
+button.fleche {
+    position: absolute;
+	top: 0;
+	left: 0;
+}
+
+button.croix{
+	position:absolute;
+	top: 0;
+	right: 0;
+}
+
+.modal-galerie.nouveau {
+	justify-content: center;
+}
+.modeedition img{
+	margin-right: 5px;
+}
+
+h2 img {
+    margin-left: 20px;
+}
+
+h4 a {
+	color: black;
+}
+
 .trash{
 	height: 15px;
 	width: 10px;
 	border: none;
-	
+	position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .Ajout {
@@ -63,12 +108,13 @@
 	display: flex;
 	gap: 1em;
 	margin-bottom: 2em;
+	width: 100%;
 
 }
 
 span#modal_btn {
 	color: grey;
-	margin-left: 20px;
+	margin-left: 5px;
 	font-size: 11px;
 }
 
@@ -493,6 +539,7 @@ form button {
 	padding: 45px;
 	background-color: #fff;
 	justify-content: center;
+	position: relative;
 }
 
 .modal1 a {

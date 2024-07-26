@@ -1,3 +1,7 @@
+//ne pas afficher ce quil ya dan la premiere modale pour afficher ce quil ya dans la seconde modale
+//faudra juste chaange le contenu de la modale et garder le titre et le bouton ainsi que rajouter un bouton fleche 
+//arriere pour revenir en arriere et une croix 
+
 window.addEventListener("load", (event) => {
   //si le token du localstorage est vrai alors effacer le menu
   if (localStorage.token) {
@@ -26,7 +30,7 @@ window.addEventListener("load", (event) => {
 
 
     //const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
-    
+
     // Fonction pour afficher la modale et ajout d'evenement
     const ouvrirmodal = function (e) {
       e.preventDefault()
@@ -77,14 +81,13 @@ window.addEventListener("load", (event) => {
     // })
 
 
-
+3
 
 
     // afficher le bandeau mode edition
     const template = `<div class="modeedition">
-		<i class="fa">	
-		</i>
-		<span>mode edition</span>
+		<img src="/Vector.png" alt="">
+		<span>mode édition</span>
 	  </div>`
     document.body.insertAdjacentHTML("afterbegin", template)
 
@@ -210,75 +213,168 @@ const modal_template = `
 </aside>`
 
 document.body.insertAdjacentHTML("beforeend", modal_template)
-document.querySelector("#portfolio h2").innerHTML += `<span id="modal_btn">Modifier</span>`
+document.querySelector("#portfolio h2").innerHTML += `<img src="/Group.png" alt=""><span id="modal_btn">Modifier</span>`
 document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
-modal.classList.add("on")
+  modal.classList.add("on")
 })
 // evenement sur la modale au click qui on enleve la class "on"
 modal.addEventListener('click', e => [
-e.target.classList.remove("on")
+  e.target.classList.remove("on")
 ])
 
 function renderModalCards(projects) {
   const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
- 
+
   projects.forEach((item, i) => {
     let figure = document.createElement('figure')
     img = document.createElement('img')
+    const button = document.createElement('button');
+    button.textContent = "\u{1F5D1}"
+    button.classList.add('trash')
+
+    button.addEventListener("click", () => {
+      fetch("http://localhost:5678/api/works/" + item.id, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + localStorage.token },
+      })
+
+        .then(response => {
+          if (response.ok) {
+            console.log("Travaux supprimer correctement");
+          } else {
+            console.error("Erreur travaux non supprimer", response.status);
+          }
+        })
+        .catch(error => {
+          console.error("Erreur envoi de la requete DELETE", error);
+        });
+    })
 
     figure.setAttribute("data-categoryId", item.categoryId)
 
     img.src = item.imageUrl
-    
+
+    figure.append(button);
     figure.append(img)
     imageTravauxWrapper.append(figure)
   })
 }
 
 
+
 const ajoutBtn = document.createElement('button');
-ajoutBtn.textContent="Ajouter une photo";
+ajoutBtn.textContent = "Ajouter une photo";
 ajoutBtn.classList.add('Ajout')
+// faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
+ajoutBtn.addEventListener("click", () => {
+  const gallerieContainer = document.querySelector('.modal-galerie');
+  //gallerieContainer.style = "display : none";
+  //const formContainer = document.createElement("div")
+  //formContainer.classList.add("modal-form")
+  gallerieContainer.innerHTML= "";
+  gallerieContainer.classList.add("nouveau")
+  document.querySelector(".Ajout").addEventListener("click", (item, i) => {
+    event.preventDefault();
+    const titleH1 = document.querySelector('.modal-wrapper h1');
+    titleH1.textContent = "Ajout photo";
+    modal.classList.add("on")
+
+    const flecheArriere = document.createElement("button");
+    flecheArriere.classList.add('fleche')
+    flecheArriere.textContent='<i class="fa-solid fa-arrow-left"></i>'
+
+    const croix = document.createElement("button");
+    croix.classList.add('croix')
+    croix.textContent='<i class="fa-solid fa-x"></i>'
+
+    const rechercheImages = document.createElement('div')
+    rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
+    
+    const form = document.createElement('form');
+
+    const titleLabel = document.createElement('label');
+    titleLabel.textContent = 'Titre';
+    form.appendChild(titleLabel);
+
+    const titleInput = document.createElement('input');
+    titleInput.type = 'text';
+    titleInput.placeholder = '';
+    form.appendChild(titleInput);
+    
+    const categoriesLabel = document.createElement('label');
+    categoriesLabel.textContent = 'Categories';
+    form.appendChild(categoriesLabel);
+    
+    const categoriesSelect = document.createElement('select');
+    categoriesSelect.id = 'categoriesSelect';
+    
+    form.appendChild(categoriesLabel);
+    form.appendChild(categoriesSelect);
+    
+    gallerieContainer.appendChild(form)
+    const btnContainer = document.querySelector('.modal-wrapper')
+    btnContainer.appendChild(rechercheImages)
+    btnContainer.appendChild(flecheArriere)
+    btnContainer.appendChild(croix)
+  });
+
+    //categories.forEach(category => {
+    //const option = document.createElement('option');
+    //option.value = category;
+    //option.textContent = category;
+    //categoriesSelect.appendChild(option);
+
+    
+    ajoutBtn.textContent = "Valider";
+    
+    
+    //btnContainer.appendChild(flecheArriere)
+    //btnContainer.appendChild(croix)
+    //console.log(formContainer)
+  //})
+})
 
 const buttonContainer = document.querySelector('.modal-wrapper');
-buttonContainer.appendChild(ajoutBtn); 
+buttonContainer.appendChild(ajoutBtn);
 
-ajoutBtn.addEventListener("click", ()=>{
-  const figure = document.querySelectorAll('figure');
+categories
 
-  figure.forEach((item, i) => { 
-    const button = document.createElement('button'); 
-    button.textContent = "\u{1F5D1}"
-    button.classList.add('trash')
-    figure[i].append(button); 
   
-    console.log(button); 
-    
-    fetch("http://localhost:5678/api/works" ,{
-      method: "DELETE",
-      headers: {"Accept" : "*/*" },
-    })
-    
-    .then(response =>{
-      if (response.ok){
-        console.log("Travaux supprimer correctement"); 
-      }else{
-        console.error("Erreur travaux non supprimer", response.status);
-      }
-    })
-    .catch(error =>{
-      console.error("Erreur envoi de la requete DELETE", error);
-    });
-  })
   
-  }
-)
+  const modal_template2 = `
+  <form id="FormulaireAjout">
+  <label for="username">Titre :</label>
+  <input type="text" id="Titre">
+  
+  <label for="Categories">Categories :</label>
+  <input type="text" id="Categories">
+      <button type="submit">Valider</button>     
+    </form>
+  `
+  const modalContainer = document.createElement('div');
+  modalContainer.insertAdjacentHTML('beforeend', modal_template2);
+
+  document.body.appendChild(modalContainer);
+
+  const form = document.getElementById('FormulaireAjout');
+  form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const title = document.getElementById('title').value;
+  const categories = document.getElementById('categories').value;
+
+});
 
 
 
-
-//data.forEach(categoryId => {
-//const categoryId
-//})
-//const cats = categories()
-//console.log(cats)
+  //data.forEach(categoryId => {
+  //const categoryId
+  //})
+  //const cats = categories()
+  //console.log(cats)
+  
+// faut que j'essaie de supprimer ou mettre en commentaire ce que je'ai fais pour essayer de tout simplement reprendre la modaletemplate et la modifier comme par exemple gallery-wrapper je met form titre aisni de suite
+// c'est chiant mais faisable faut juste que mon cerveau soit organiser ainsi que mes idees pour que j'y arrive parce que en faite j'ai trop d'idee dans la tete 
+//  bref ce soir objectif faire apparaitre l'espace vide avec un titre prenom et l'espace vide avec les categories 
+// normalement ce que j'ai fais ça marche mais ça s'ouvre pas dans la modale 
+//document.body.insertAdjacentHTML("beforeend", modal_template2);
