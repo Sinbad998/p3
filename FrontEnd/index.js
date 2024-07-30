@@ -268,10 +268,8 @@ ajoutBtn.classList.add('Ajout')
 // faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
 ajoutBtn.addEventListener("click", () => {
   const gallerieContainer = document.querySelector('.modal-galerie');
-  //gallerieContainer.style = "display : none";
-  //const formContainer = document.createElement("div")
-  //formContainer.classList.add("modal-form")
   gallerieContainer.innerHTML= "";
+  
   gallerieContainer.classList.add("nouveau")
   document.querySelector(".Ajout").addEventListener("click", (item, i) => {
     event.preventDefault();
@@ -279,16 +277,41 @@ ajoutBtn.addEventListener("click", () => {
     titleH1.textContent = "Ajout photo";
     modal.classList.add("on")
 
-    const flecheArriere = document.createElement("button");
+    const flecheArriere = document.createElement("div");
     flecheArriere.classList.add('fleche')
-    flecheArriere.textContent='<i class="fa-solid fa-arrow-left"></i>'
+    flecheArriere.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
+    flecheArriere.addEventListener("click", ()=>{
+    
+    })
 
-    const croix = document.createElement("button");
+    const croix = document.createElement("div");
     croix.classList.add('croix')
-    croix.textContent='<i class="fa-solid fa-x"></i>'
+    croix.innerHTML='<i class="fa-solid fa-x"></i>'
+    croix.addEventListener("click", ()=>{
+    
+    })
+
 
     const rechercheImages = document.createElement('div')
-    rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
+    //rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
+    const ajoutPhotoTemplate = `
+    <label id="menu"> 
+      <img src="picture-svgrepo-com 1.png" alt="">
+      <input type="file"/>
+      <div>+ Ajouter photo</div>
+      <span>
+        jpg, png : 4mo max
+      </span>
+    </label>`
+    
+    document.querySelector('.modal-wrapper h1').insertAdjacentHTML("afterend" ,ajoutPhotoTemplate)
+
+
+    const image = document.createElement('img');
+    
+    rechercheImages.appendChild(image);
+    const btnContainer = document.querySelector('.modal-wrapper')
+    btnContainer.insertAdjacentElement('afterend', rechercheImages);
     
     const form = document.createElement('form');
 
@@ -303,19 +326,21 @@ ajoutBtn.addEventListener("click", () => {
     
     const categoriesLabel = document.createElement('label');
     categoriesLabel.textContent = 'Categories';
+    
     form.appendChild(categoriesLabel);
     
     const categoriesSelect = document.createElement('select');
     categoriesSelect.id = 'categoriesSelect';
     
+    
     form.appendChild(categoriesLabel);
     form.appendChild(categoriesSelect);
     
     gallerieContainer.appendChild(form)
-    const btnContainer = document.querySelector('.modal-wrapper')
     btnContainer.appendChild(rechercheImages)
     btnContainer.appendChild(flecheArriere)
     btnContainer.appendChild(croix)
+
   });
 
     //categories.forEach(category => {
@@ -326,6 +351,9 @@ ajoutBtn.addEventListener("click", () => {
 
     
     ajoutBtn.textContent = "Valider";
+    ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
+    
+    
     
     
     //btnContainer.appendChild(flecheArriere)
@@ -340,7 +368,7 @@ buttonContainer.appendChild(ajoutBtn);
 categories
 
   
-  
+
   const modal_template2 = `
   <form id="FormulaireAjout">
   <label for="username">Titre :</label>
