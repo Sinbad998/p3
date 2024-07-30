@@ -496,24 +496,28 @@ a {
 	flex-direction: column;
 	width: 40%;
 	gap: 1em;
-	margin: 0 auto
+	margin: 0 auto;
+	align-items: center;
 }
 
 input#email {
 	padding: 1em;
-	box-shadow: 3px 3px 3px 3px grey;
 	border: white;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	width: 100%;
 }
 
 input#password {
 	padding: 1em;
-	box-shadow: 3px 3px 3px 3px grey;
+	box-shadow: 0px 4px 14px 0px #00000017;
 	border: white;
+	width: 100%;
 }
 
 label {
 	display: flex;
 	/*justify-content: center;*/
+	width: 100%;
 }
 
 main h1:not(.modal h1) {
@@ -550,9 +554,9 @@ form button {
 	margin-top: 1em;
 	background-color: #1D6154;
 	color: whitesmoke;
-	width: 237px;
-	margin-left: 107px;
+	width: 179px;
 	justify-content: center;
+	height: 36px;
 }
 
 .modeedition {
