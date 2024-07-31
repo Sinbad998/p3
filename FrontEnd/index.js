@@ -269,7 +269,8 @@ ajoutBtn.classList.add('Ajout')
 ajoutBtn.addEventListener("click", () => {
   const gallerieContainer = document.querySelector('.modal-galerie');
   gallerieContainer.innerHTML= "";
-  
+  // j"essaie de rendre la galleriecntainer non visible plutot que de supprimer le contenu pour pouvoir le faire reapparaitre en cliquant sur la fleche
+  //gallerieContainer.style = "display : none"
   gallerieContainer.classList.add("nouveau")
   document.querySelector(".Ajout").addEventListener("click", (item, i) => {
     event.preventDefault();
@@ -281,14 +282,19 @@ ajoutBtn.addEventListener("click", () => {
     flecheArriere.classList.add('fleche')
     flecheArriere.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
     flecheArriere.addEventListener("click", ()=>{
-    
+      const modal2 = document.getElementById('menu')
+      modal2.innerHTML=""
+      //const retourArriere = document.querySelector(".modal-wrapper");
+      //retourArriere
+      
     })
 
     const croix = document.createElement("div");
     croix.classList.add('croix')
     croix.innerHTML='<i class="fa-solid fa-x"></i>'
     croix.addEventListener("click", ()=>{
-    
+      const modalFermer = document.getElementById('modal');
+      modalFermer.classList.remove("on")
     })
 
 
@@ -297,7 +303,7 @@ ajoutBtn.addEventListener("click", () => {
     const ajoutPhotoTemplate = `
     <label id="menu"> 
       <img src="picture-svgrepo-com 1.png" alt="">
-      <input type="file"/>
+      <input type="file" id="file-input" accept="image/jpeg, image/png, image/4mo"/>
       <div>+ Ajouter photo</div>
       <span>
         jpg, png : 4mo max
@@ -306,12 +312,50 @@ ajoutBtn.addEventListener("click", () => {
     
     document.querySelector('.modal-wrapper h1').insertAdjacentHTML("afterend" ,ajoutPhotoTemplate)
 
+    const fileInput =  document.getElementById('file-input');
+    fileInput.addEventListener('change', previewFile);
+
+    function previewFile () {
+// regex pour mettre en parametres jpeg et png
+      const fileRegex = /\.(jpeg|png)$/i;
+
+      if (this.files.length === 0  || !fileRegex.
+        test(this.files[0].name)) {
+        return;
+      }
+
+      const file = this.files[0];
+
+      const file_reader = new FileReader();
+
+      file_reader.readAsDataURL(file);
+
+      file_reader.addEventListener('load', (event) =>
+        displayImage(event,file));
+      
+    } 
+
+    function displayImage(event, file) {
+      const figureElement = document.createElement('figure');
+      figureElement.id = "image_selectionner";
+
+      const imageElement = document.createElement('img');
+      imageElement.src = event.target.result;
+
+      figureElement.appendChild(imageElement);
+
+      document.body.querySelector('label #menu').appendChild(figureElement);
+    }
 
     const image = document.createElement('img');
-    
     rechercheImages.appendChild(image);
+
     const btnContainer = document.querySelector('.modal-wrapper')
     btnContainer.insertAdjacentElement('afterend', rechercheImages);
+    //const modalForm = document.createElement('div')
+    //modalForm.classList.add("form")
+    //console.log(mod)
+    //document.querySelector('.modal-wrapper label').insertAdjacentHTML("afterend" ,modalForm)
     
     const form = document.createElement('form');
 
@@ -331,6 +375,8 @@ ajoutBtn.addEventListener("click", () => {
     
     const categoriesSelect = document.createElement('select');
     categoriesSelect.id = 'categoriesSelect';
+
+
     
     
     form.appendChild(categoriesLabel);
