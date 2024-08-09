@@ -269,7 +269,12 @@ ajoutBtn.classList.add('Ajout')
 
 // faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
 ajoutBtn.addEventListener("click", (item,) => {
+  ajoutBtn.textContent = "Valider";
+  ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
+  ajoutBtn.style = 'display : none';
 
+
+  
   const gallerieContainer = document.querySelector('.modal-galerie');
   gallerieContainer.innerHTML= "";
   // j"essaie de rendre la galleriecntainer non visible plutot que de supprimer le contenu pour pouvoir le faire reapparaitre en cliquant sur la fleche
@@ -280,6 +285,14 @@ ajoutBtn.addEventListener("click", (item,) => {
     const titleH1 = document.querySelector('.modal-wrapper h1');
     titleH1.textContent = "Ajout photo";
     modal.classList.add("on")
+    
+    const btnNouveauxValider = document.createElement('button');
+    btnNouveauxValider.textContent = "Valider" 
+    btnNouveauxValider.classList.add("Valid")
+    ajoutBtn.insertAdjacentElement("afterend", btnNouveauxValider);
+    btnNouveauxValider.addEventListener("click", ()=>{
+      
+    })
 
     const flecheArriere = document.createElement("div");
     flecheArriere.classList.add('fleche')
@@ -293,8 +306,7 @@ ajoutBtn.addEventListener("click", (item,) => {
       document.querySelector(".nouveau").classList.remove("nouveau")
       ajoutBtn.textContent = "Ajouter une photo";
       titleH1.innerHTML = "Galerie photo"
-      ajoutBtn.style = ""
-  
+      //ajoutBtn.style = ""
     })
 
     const croix = document.createElement("div");
@@ -425,8 +437,6 @@ ajoutBtn.addEventListener("click", (item,) => {
   fillFormSelect()
 
     
-    ajoutBtn.textContent = "Valider";
-    ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
 })
 
 const buttonContainer = document.querySelector('.modal-wrapper');
@@ -476,12 +486,12 @@ buttonContainer.appendChild(ajoutBtn);
   //la
   fetch("http://localhost:5678/api/works/", {
     method: "POST",
-    headers: { "Content-Type: multipart/form-data" },
+    headers: {"Authorization": "Bearer " +  localStorage.token  },
     body: ({
       image,title,category
     })
     .then(response => response.json())
-    .the,(data =>{
+    .then(data =>{
       if(data.success) {
         console.log("Creation effectuer")
       } else {
