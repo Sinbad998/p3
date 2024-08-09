@@ -108,6 +108,7 @@ window.addEventListener("load", (event) => {
       location.href = "login.html"
     })
 
+    // pour la fonctionnalites du logout pour afficher les filtres
 
   }
 })
@@ -229,7 +230,7 @@ function renderModalCards(projects) {
     let figure = document.createElement('figure')
     img = document.createElement('img')
     const button = document.createElement('button');
-    button.textContent = "\u{1F5D1}"
+    button.className = 'fa-solid fa-trash-can'
     button.classList.add('trash')
 
     button.addEventListener("click", () => {
@@ -265,14 +266,16 @@ function renderModalCards(projects) {
 const ajoutBtn = document.createElement('button');
 ajoutBtn.textContent = "Ajouter une photo";
 ajoutBtn.classList.add('Ajout')
+
 // faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
-ajoutBtn.addEventListener("click", () => {
+ajoutBtn.addEventListener("click", (item,) => {
+
   const gallerieContainer = document.querySelector('.modal-galerie');
   gallerieContainer.innerHTML= "";
   // j"essaie de rendre la galleriecntainer non visible plutot que de supprimer le contenu pour pouvoir le faire reapparaitre en cliquant sur la fleche
   //gallerieContainer.style = "display : none"
   gallerieContainer.classList.add("nouveau")
-  document.querySelector(".Ajout").addEventListener("click", (item, i) => {
+  //document.querySelector(".Ajout").addEventListener("click", (item, i) => {
     event.preventDefault();
     const titleH1 = document.querySelector('.modal-wrapper h1');
     titleH1.textContent = "Ajout photo";
@@ -282,11 +285,16 @@ ajoutBtn.addEventListener("click", () => {
     flecheArriere.classList.add('fleche')
     flecheArriere.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
     flecheArriere.addEventListener("click", ()=>{
-      const modal2 = document.getElementById('menu')
-      modal2.innerHTML=""
-      //const retourArriere = document.querySelector(".modal-wrapper");
-      //retourArriere
       
+      const modal2 = document.getElementById('menu')
+      //modal2.innerHTML=""
+      modal2.remove()
+      document.querySelector(".nouveau form").remove()
+      document.querySelector(".nouveau").classList.remove("nouveau")
+      ajoutBtn.textContent = "Ajouter une photo";
+      titleH1.innerHTML = "Galerie photo"
+      ajoutBtn.style = ""
+  
     })
 
     const croix = document.createElement("div");
@@ -295,6 +303,8 @@ ajoutBtn.addEventListener("click", () => {
     croix.addEventListener("click", ()=>{
       const modalFermer = document.getElementById('modal');
       modalFermer.classList.remove("on")
+
+      flecheArriere.click()
     })
 
 
@@ -302,10 +312,10 @@ ajoutBtn.addEventListener("click", () => {
     //rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
     const ajoutPhotoTemplate = `
     <label id="menu"> 
-      <img src="picture-svgrepo-com 1.png" alt="">
-      <input type="file" id="file-input" accept="image/jpeg, image/png, image/4mo"/>
-      <div>+ Ajouter photo</div>
-      <span>
+      <img src="assets/icons/picture-svgrepo-com 1.png" alt="">
+      <input type="file" id="file-input" accept="image/jpeg, image/png, image/4mo , image/jpg"/>
+      <div class = divAjout >+ Ajouter photo</div>
+      <span class = spanAjout>
         jpg, png : 4mo max
       </span>
     </label>`
@@ -317,7 +327,7 @@ ajoutBtn.addEventListener("click", () => {
 
     function previewFile () {
 // regex pour mettre en parametres jpeg et png
-      const fileRegex = /\.(jpeg|png)$/i;
+      const fileRegex = /\.(jpeg|jpg|png)$/i;
 
       if (this.files.length === 0  || !fileRegex.
         test(this.files[0].name)) {
@@ -332,6 +342,10 @@ ajoutBtn.addEventListener("click", () => {
 
       file_reader.addEventListener('load', (event) =>
         displayImage(event,file));
+        const divAjout = document.querySelector('.divAjout');
+        divAjout.style = 'display : none';
+        const spanAjout = document.querySelector('.spanAjout')
+        spanAjout.style = 'display:none'
       
     } 
 
@@ -343,9 +357,12 @@ ajoutBtn.addEventListener("click", () => {
       imageElement.src = event.target.result;
 
       figureElement.appendChild(imageElement);
+      document.body.querySelector('label#menu').classList.add("loaded")
+      document.body.querySelector('label#menu img').src = event.target.result;
+      
 
-      document.body.querySelector('label #menu').appendChild(figureElement);
     }
+    //document.body.querySelector('label #menu').appendChild(figureElement);
 
     const image = document.createElement('img');
     rechercheImages.appendChild(image);
@@ -387,43 +404,46 @@ ajoutBtn.addEventListener("click", () => {
     btnContainer.appendChild(flecheArriere)
     btnContainer.appendChild(croix)
 
-  });
+  
 
-    //categories.forEach(category => {
-    //const option = document.createElement('option');
-    //option.value = category;
-    //option.textContent = category;
-    //categoriesSelect.appendChild(option);
+  async function fillFormSelect(item,i){
+    const url = `http://localhost:5678/api/categories`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const defaultOption = `<option value="0"></option>`
+    console.log(categoriesSelect)
+    categoriesSelect.innerHTML = defaultOption;
+
+    data.forEach(category => {
+      console.log(category)
+      const option = document.createElement('option');
+      option.value = category.id;
+      option.textContent = category.name;
+      categoriesSelect.appendChild(option);
+    })
+  }
+  fillFormSelect()
 
     
     ajoutBtn.textContent = "Valider";
     ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
-    
-    
-    
-    
-    //btnContainer.appendChild(flecheArriere)
-    //btnContainer.appendChild(croix)
-    //console.log(formContainer)
-  //})
 })
 
 const buttonContainer = document.querySelector('.modal-wrapper');
 buttonContainer.appendChild(ajoutBtn);
 
-categories
 
   
 
   const modal_template2 = `
   <form id="FormulaireAjout">
   <label for="username">Titre :</label>
-  <input type="text" id="Titre">
+  <input type="text" id="Titre" required>
   
   <label for="Categories">Categories :</label>
-  <input type="text" id="Categories">
-      <button type="submit">Valider</button>     
-    </form>
+  <input type="text" id="Categories" required>
+      <button type="submit" class="Valider">Valider</button>     
+  </form>
   `
   const modalContainer = document.createElement('div');
   modalContainer.insertAdjacentHTML('beforeend', modal_template2);
@@ -436,7 +456,47 @@ categories
 
   const title = document.getElementById('title').value;
   const categories = document.getElementById('categories').value;
+  
+  const btnValider = document.querySelector('.Ajout')
+  btnValider.addEventListener("click", () =>{
+    if (!champsValides()) {
+      afficherMessageErreur('Veuillez remplir tous les champs correctement.');
+      return;
+    }
+    function champsValides(){
+      validerEmail()
+    }
 
+    function validerEmail(email) {
+      let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+      if (!emailRegExp.test(email)) {
+          throw new Error("L'email n'est pas valide.")
+      }
+  }
+  //la
+  fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: { "Content-Type: multipart/form-data" },
+    body: ({
+      image,title,category
+    })
+    .then(response => response.json())
+    .the,(data =>{
+      if(data.success) {
+        console.log("Creation effectuer")
+      } else {
+        console.error("Erreur")
+      }
+    })
+    .catch(error =>{
+      console.eror ("erreur")
+    })
+  })
+  
+  })
+
+
+  
 });
 
 
