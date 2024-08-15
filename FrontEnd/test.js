@@ -460,21 +460,64 @@ buttonContainer.appendChild(ajoutBtn);
 //console.log(modalContainer)
   document.body.appendChild(modalContainer);
 
+  function validerTitle(title){
+    if (title.length < 2){
+      throw new Error("le titre est trop court.")
+    }
+  }
+
+  function validerCategories(categories){
+    if(!categoriesSelect.value)
+      throw new Error("la category n'as pas été selectioneer")
+  }
+
+  function gererFormulaire() {
+    try {
+      let baliseTitle = document.getElementById('title')
+      let title = baliseTitle.value;
+      validerTitle(title)
+
+      const baliseCategories = document.getElementById('categories')
+      let categories = baliseCategories.value;
+      validerCategories(categories)
+
+    } catch(erreur) {
+        console.log("erreu")
+    }
+    
+}
+  
 // Gestion de l'événement Submit sur le formulaire
   let form = document.getElementById('FormulaireAjout');
   console.log(form)
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    
-    let baliseTitle = document.getElementById('title')
-    let title = baliseTitle.value;
-    console.log(title)
+    gererFormulaire()
+    if(validerTitle(title) && validerCategories(categories)) {
+        fetch("http://localhost:5678/api/works/", {
+            method: "POST",
+            headers: {"Authorization": "Bearer " +  localStorage.token  },
+            body: ({
+              image,title,category
+            })
+            .then(response => response.json())
+            .then(data =>{
+              if(data.success) {
+                console.log("Creation effectuer")
+              } else {
+                console.error("Erreur")
+              }
+            })
+            .catch(error =>{
+              console.eror ("erreur")
+            })
+          })
 
-    const baliseCategories = document.getElementById('categories')
-    let categories = baliseCategories.value;
-    console.log(title)
+    }else{
+      console.log("erreur")
+    }  
   
-  });
+      })
 
 
 const btnValider = document.querySelector('.Valider')
