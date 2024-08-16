@@ -478,7 +478,7 @@ form.addEventListener('submit', (event) => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('categories', categories);
-  // Ajouter l'image au formData si nécessaire
+  
 
   fetch("http://localhost:5678/api/works/", {
     method: "POST",
@@ -496,16 +496,13 @@ form.addEventListener('submit', (event) => {
   .then(data => {
     if (data.success) {
       console.log("Création effectuée");
-      // Mettre à jour l'interface utilisateur
+      
     } else {
       console.error("Erreur:", data.message);
-      // Afficher un message d'erreur
+      
     }
   })
-  .catch(error => {
-    console.error('Erreur réseau:', error);
-    // Afficher un message d'erreur générique
-  });
+
 });
 
 function champsValides(title, categories) {
