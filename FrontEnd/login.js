@@ -1,16 +1,9 @@
 const form = document.getElementById('FormulaireLogin')
-//formData.append("email")
-//formData.append("password")
-//console.log(formData)
 
 form.addEventListener("submit", (event) => {
     event.preventDefault()
     let formData = new FormData(form);
-    //console.log(FormData)
-    //const email = document.getElementById('email');
-    //const password = document.getElementById('password');
-    //const email = formData.getAll('email');
-    //const password = formData.getAll('password');
+
     const email = form.email.value
     const password = form.password.value
 
@@ -26,6 +19,7 @@ form.addEventListener("submit", (event) => {
     })
         .then(r => r.json())
         .then(data => {
+
             console.log(data)
             if (data.token) {
                 
