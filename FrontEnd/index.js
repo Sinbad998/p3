@@ -472,13 +472,16 @@ buttonContainer.appendChild(ajoutBtn);
     event.preventDefault();
     let formData = new FormData(form);
     //let baliseTitle = document.getElementById('title')
-    const title = form.title.value;
-    console.log(title)
-
     //const baliseCategories = document.getElementById('categories')
+    const title = form.title.value;
     let categories = form.categories.value;
+    let imageForm = form.image;
+    
+    console.log(categories)
     console.log(title)
   
+    
+
     fetch("http://localhost:5678/api/works/", {
       method: "POST",
       headers: {"Authorization": "Bearer " +  localStorage.token  },
