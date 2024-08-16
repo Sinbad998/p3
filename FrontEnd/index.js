@@ -443,6 +443,7 @@ const buttonContainer = document.querySelector('.modal-wrapper');
 buttonContainer.appendChild(ajoutBtn);
 //console.log(buttonContainer)
 
+
   
 
   const modal_template2 = `
@@ -462,24 +463,48 @@ buttonContainer.appendChild(ajoutBtn);
 
 // Gestion de l'événement Submit sur le formulaire
   let form = document.getElementById('FormulaireAjout');
-  console.log(form)
+  const btnValider = document.querySelector('.Valider');
+  form.appendChild(btnValider)
+  console.log(btnValider)
+  
+ // console.log(form)
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    
-    let baliseTitle = document.getElementById('title')
-    let title = baliseTitle.value;
+    let formData = new FormData(form);
+    //let baliseTitle = document.getElementById('title')
+    const title = form.title.value;
     console.log(title)
 
-    const baliseCategories = document.getElementById('categories')
-    let categories = baliseCategories.value;
+    //const baliseCategories = document.getElementById('categories')
+    let categories = form.categories.value;
     console.log(title)
   
+    fetch("http://localhost:5678/api/works/", {
+      method: "POST",
+      headers: {"Authorization": "Bearer " +  localStorage.token  },
+      body: ({
+        image,title,category
+      })
+      .then(response => response.json())
+      .then(data =>{
+        if(data.success) {
+          console.log("Creation effectuer")
+        } else {
+          console.error("Erreur")
+        }
+      })
+      .catch(error =>{
+        console.eror ("erreur")
+      })
+    })
+
   });
 
 
-const btnValider = document.querySelector('.Valider')
+ //btnValider = document.querySelector('.Valider')
  console.log(btnValider)
  btnValider.addEventListener("click", () =>{
+  console.log("j'ai cliquer");
    if (!champsValides()) {
      afficherMessageErreur('Veuillez remplir tous les champs correctement.');
      return;
@@ -494,25 +519,6 @@ const btnValider = document.querySelector('.Valider')
          throw new Error("Le titre n'est pas valide.")
      }
  }
- 
- fetch("http://localhost:5678/api/works/", {
-   method: "POST",
-   headers: {"Authorization": "Bearer " +  localStorage.token  },
-   body: ({
-     image,title,category
-   })
-   .then(response => response.json())
-   .then(data =>{
-     if(data.success) {
-       console.log("Creation effectuer")
-     } else {
-       console.error("Erreur")
-     }
-   })
-   .catch(error =>{
-     console.eror ("erreur")
-   })
- })
  
  })
 
