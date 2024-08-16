@@ -461,62 +461,56 @@ buttonContainer.appendChild(ajoutBtn);
   document.body.appendChild(modalContainer);
 
 // Gestion de l'événement Submit sur le formulaire
-  let form = document.getElementById('FormulaireAjout');
-  console.log(form)
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    
-    let baliseTitle = document.getElementById('title')
-    let title = baliseTitle.value;
-    console.log(title)
+const form = document.getElementById('FormulaireAjout');
+const btnValider = document.querySelector('.Valider');
 
-    const baliseCategories = document.getElementById('categories')
-    let categories = baliseCategories.value;
-    console.log(title)
-  
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const title = document.getElementById('title').value;
+  const categories = document.getElementById('categories').value;
+
+  if (!champsValides(title, categories)) {
+    afficherMessageErreur('Veuillez remplir tous les champs correctement.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('categories', categories);
+  // Ajouter l'image au formData si nécessaire
+
+  fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + localStorage.token
+    },
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erreur lors de la requête');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.success) {
+      console.log("Création effectuée");
+      // Mettre à jour l'interface utilisateur
+    } else {
+      console.error("Erreur:", data.message);
+      // Afficher un message d'erreur
+    }
+  })
+  .catch(error => {
+    console.error('Erreur réseau:', error);
+    // Afficher un message d'erreur générique
   });
+});
 
-
-const btnValider = document.querySelector('.Valider')
- console.log(btnValider)
- btnValider.addEventListener("click", () =>{
-   if (!champsValides()) {
-     afficherMessageErreur('Veuillez remplir tous les champs correctement.');
-     return;
-   }
-   function champsValides(){
-     validerEmail()
-   }
-
-   function validerTitle(title) {
-     let titleRegExp = new RegExp("[a-z0-9._-]")
-     if (!titleRegExp.test(title)) {
-         throw new Error("Le titre n'est pas valide.")
-     }
- }
- 
- fetch("http://localhost:5678/api/works/", {
-   method: "POST",
-   headers: {"Authorization": "Bearer " +  localStorage.token  },
-   body: ({
-     image,title,category
-   })
-   .then(response => response.json())
-   .then(data =>{
-     if(data.success) {
-       console.log("Creation effectuer")
-     } else {
-       console.error("Erreur")
-     }
-   })
-   .catch(error =>{
-     console.eror ("erreur")
-   })
- })
- 
- })
-
-
+function champsValides(title, categories) {
+  return title && categories;
+}
 
   //data.forEach(categoryId => {
   //const categoryId
