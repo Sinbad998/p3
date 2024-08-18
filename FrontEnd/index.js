@@ -6,30 +6,6 @@ window.addEventListener("load", (event) => {
   //si le token du localstorage est vrai alors effacer le menu
   if (localStorage.token) {
 
-    //alert("connecter")
-    //const mesProjets = document.querySelector("#contact h2")
-    // mesProjets.textContent = "Mes Projets"
-    //categories.style = "display : none"
-    //const categoryBtn.style = "display : none"
-    //const toutCategoryBtn = document.querySelectorAll(".categoryBtn")
-    //document.querySelector(".Menu").innerHTML = "";
-    //document.querySelector("divcontainer").innerHTML = "";
-    //document.q
-    //function cacherMenu(){
-    //toutCategoryBtn.forEach(button =>{
-    //button.style.display = "none"
-    //})
-    //}
-    // Afficher le bouton modifier
-    //const mesProjets = document.querySelector('#portfolio h2');
-    //const ModifBtn = document.createElement("button");
-    //ModifBtn.textContent = "Modifier";
-    //mesProjets.appendChild(ModifBtn)
-
-    //afficher le bouton modifier avec le contenu de la modale
-
-
-    //const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
 
     // Fonction pour afficher la modale et ajout d'evenement
     const ouvrirmodal = function (e) {
@@ -63,26 +39,6 @@ window.addEventListener("load", (event) => {
       modal.removeEventListener("click", closemodal)
       modal = null
     }
-    // pour bloquer la propagation de l'evenement
-    // const stopPropagation = function (e) {
-    //   e.stopPropagation()
-    // }
-
-    //
-    // document.querySelectorAll(".js-modal").forEach(a => {
-    //   a.addEventListener("click", ouvrirmodal)
-
-    // })
-    // evements sur la page qui ecoute le clavier 
-    // window.addEventListener("keydown", function (e) {
-    //   if (e.key === "Escape") {
-    //     closemodal(e)
-    //   }
-    // })
-
-
-3
-
 
     // afficher le bandeau mode edition
     const template = `<div class="modeedition">
