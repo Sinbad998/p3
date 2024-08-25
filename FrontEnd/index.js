@@ -395,6 +395,9 @@ ajoutBtn.addEventListener("click", (item,) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       let formData = new FormData(form);
+      formData.append("title", title);
+      formData.append("category", categories);
+      formData.append("image", image);
 
       let title = form.title.value;
       let categories = form.categories.value;
@@ -429,6 +432,19 @@ ajoutBtn.addEventListener("click", (item,) => {
   
           figure.appendChild(image);
           galleryContainer.appendChild(figure);
+
+          const modalImg = document.querySelector('.modal-galerie');
+
+          figure = document.createElement('figure');
+          image = document.createElement('img');
+          image.src = imageUrl;
+          
+          
+          figure.appendChild(image);
+          modalImg.appendChild(figure);
+
+
+
           console.log("creation effectuer")
           console.log(data)
           //sinon erreur 
