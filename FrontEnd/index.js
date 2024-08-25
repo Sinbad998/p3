@@ -416,7 +416,7 @@ ajoutBtn.addEventListener("click", (item,) => {
         .then(response => response.json())
         .then(data =>{
           console.log(data)
-        
+          if(data.success){
           const imageUrl = imageForm;
           console.log(imageUrl)
           const galleryContainer = document.querySelector('.gallery');
@@ -428,8 +428,11 @@ ajoutBtn.addEventListener("click", (item,) => {
   
           figure.appendChild(image);
           galleryContainer.appendChild(figure);
-
-          alert('Le nouvel travail a été ajouté avec succès.')
+          console.log("creation effectuer")
+          console.log(data)
+        } else {
+          console.erreur("erreur")
+        }
         })
         .catch(error =>{
           console.eror ("Une erreur c'est produite")
