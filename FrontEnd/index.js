@@ -416,6 +416,7 @@ ajoutBtn.addEventListener("click", (item,) => {
         .then(response => response.json())
         .then(data =>{
           console.log(data)
+          //si la data est ok creation d'image et implentation dans le dom
           if(data.success){
           const imageUrl = imageForm;
           console.log(imageUrl)
@@ -430,6 +431,7 @@ ajoutBtn.addEventListener("click", (item,) => {
           galleryContainer.appendChild(figure);
           console.log("creation effectuer")
           console.log(data)
+          //sinon erreur 
         } else {
           console.erreur("erreur")
         }
