@@ -392,18 +392,20 @@ ajoutBtn.addEventListener("click", (item,) => {
     form.appendChild(categoriesSelect);
     form.appendChild(btnValider);
     
+    let title = form.title.value;
+    let categories = form.categories.value;
+    let imageForm = form.image;
+    console.log(categories)
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       let formData = new FormData(form);
-      formData.append("title", title);
-      formData.append("category", categories);
-      formData.append("image", image);
+     // formData.append("title", title);
+      //formData.append("category", categories);
+     // formData.append("image", image);
 
-      let title = form.title.value;
-      let categories = form.categories.value;
-      let imageForm = form.image;
       
-     
+      console.log(imageForm)
       console.log(categories)
       console.log(title)
 
@@ -413,49 +415,49 @@ ajoutBtn.addEventListener("click", (item,) => {
       
       fetch("http://localhost:5678/api/works/", {
         method: "POST",
-        headers: {"Authorization": "Bearer " +  localStorage.getItem("token")  },
+        headers: {"Authorization": "Bearer " +  localStorage.getItem("token")},
         body: bodyContent
-        })
-        .then(response => response.json())
-        .then(data =>{
-          console.log(data)
-          //si la data est ok creation d'image et implentation dans le dom
-          if(data.success){
-          const imageUrl = imageForm;
-          console.log(imageUrl)
-          const galleryContainer = document.querySelector('.gallery');
-  
-          const figure = document.createElement('figure');
-          const image = document.createElement('img');
-          image.src = imageUrl;
+    })
+    .then(response => response.json())
+    .then(response => {
+      console.log(response.status);
+      console.log(response.statusText);
+      return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        // si la data est ok, création d'image et implémentation dans le DOM
+        if (data.success) {
+            const imageUrl = imageForm;
+            console.log(imageUrl);
 
-  
-          figure.appendChild(image);
-          galleryContainer.appendChild(figure);
-
-          const modalImg = document.querySelector('.modal-galerie');
-
-          figure = document.createElement('figure');
-          image = document.createElement('img');
-          image.src = imageUrl;
-          
-          
-          figure.appendChild(image);
-          modalImg.appendChild(figure);
-
-
-
-          console.log("creation effectuer")
-          console.log(data)
-          //sinon erreur 
+            const galleryContainer = document.querySelector('.gallery');
+            let figure = document.createElement('figure');
+            let image = document.createElement('img');
+            image.src = imageUrl;
+    
+            figure.appendChild(image);
+            galleryContainer.appendChild(figure);
+    
+            const modalImg = document.querySelector('.modal-galerie');
+            figure = document.createElement('figure');
+            image = document.createElement('img');
+            image.src = imageUrl;
+    
+            figure.appendChild(image);
+            modalImg.appendChild(figure);
+    
+            console.log("Création effectuée");
+            console.log(data);
         } else {
-          console.erreur("erreur")
+            console.error("Erreur");
         }
-        })
-        .catch(error =>{
-          console.eror ("Une erreur c'est produite")
-          alert('Une erreur cest produite')
-        })
+    })
+    .catch(error => {
+        console.error("Une erreur s'est produite");
+        alert("Une erreur s'est produite");
+    });
+    
       
       
     });
