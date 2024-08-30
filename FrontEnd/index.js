@@ -42,9 +42,9 @@ window.addEventListener("load", (event) => {
     
     // afficher le bandeau mode edition
     const template = `<div class="modeedition">
-		<img src="/Vector.png" alt="">
-		<span>mode édition</span>
-	  </div>`
+ <img src="/Vector.png" alt="">
+ <span>mode édition</span>
+ </div>`
     document.body.insertAdjacentHTML("afterbegin", template)
     
     
@@ -58,13 +58,13 @@ window.addEventListener("load", (event) => {
     })
     
   } else {
-    alert("pas connecter")
+    //alert("pas connecter")
     categories()
     document.querySelector("li:nth-child(3)").addEventListener("click", () => {
       location.href = "login.html"
     })
     
-    modal_template.style.display = "none"
+    modal_template.style= "display = none"
     // pour la fonctionnalites du logout pour afficher les filtres
     
   }
@@ -82,18 +82,18 @@ function renderCards(projects) {
   console.log(projects)
   //boucle pour creer une figure et une image pour chaque item dans projects
   projects.forEach((item, i) => {
-    let figure = document.createElement('figure')
-    , img = document.createElement('img')
-    //
+    const figure = document.createElement('figure')
     figure.setAttribute("data-categoryId", item.categoryId)
-    
-    
+    const img = document.createElement('img')
+    const figcaption = document.createElement('figcaption')
     img.src = item.imageUrl
-    //console.log(galleryContainer)
+    figcaption.textContent = item.title
+    
     figure.append(img)
+    figure.append(figcaption)
     galleryContainer.append(figure)
     
-    //const reponse = await fetch("")
+    
   })
 }
 
@@ -124,204 +124,226 @@ async function categories() {
     const worksItem = document.querySelectorAll(".gallery figure")
     //boucle pour que chaque element de workItem est supprime chaque style
     worksItem.forEach(element2 => {
-      element2.style = ""
+      element2.style = ""})
     })
-  })
-  div.append(button)
-  const divcontainer = document.querySelector("#portfolio h2")
-  divcontainer.append(div)
-  //console.log(data)
-  
-  //boucle pour recuperer chaque id dans le tableau data puis creation de bouton associer
-  data.forEach(element => {
-    const categoryId = element.id;
-    const categoryBtn = document.createElement("button");
-    categoryBtn.textContent = element.name
-    //creation d'evenement click qui selectionne toutes les figure dans .figure
-    categoryBtn.addEventListener("click", (event) => {
-      //alert (event.target)
-      const worksItem = document.querySelectorAll(".gallery figure")
-      //boucle pour que chaque element de workItem est supprime chaque style
-      worksItem.forEach(element => {
-        element.style = ""
+    button.addEventListener("mouseover",(event)=>{
+      event.target.style.background = "green";
+    })
+    button.addEventListener("mouseout",(event)=>{
+      event.target.style.background = "";
+    })
+    div.append(button)
+    const divcontainer = document.querySelector("#portfolio h2")
+    divcontainer.append(div)
+    
+    
+    //boucle pour recuperer chaque id dans le tableau data puis creation de bouton associer
+    data.forEach(element => {
+      const categoryId = element.id;
+      const categoryBtn = document.createElement("button");
+      categoryBtn.textContent = element.name
+      categoryBtn.addEventListener("mouseover",(event)=>{
+        event.target.style.background = "green";
       })
-      //Boucle qui regarde tout les element de workItem
-      worksItem.forEach(element2 => {
-        //condition si l'element.id n'est pas égal à element2.dataset.categoryId ceci ne s'affiche pas 
-        if (element.id !== parseInt(element2.dataset.categoryid)) {
-          element2.style = "display : none"
-        }
-      });
-    })
-    
-    div.append(categoryBtn);
-  });
-  
-  console.log(button)
-}
-
-// variable qui integre du code html pour une modale et l'integres a l'index.html
-const modal_template = `
-<aside id="modal"> 
-  <div class ="modal-wrapper">
-    <h1>Galerie photo</h1>
-    <div class="modal-galerie">
-    </div>
-  </div>
-</aside>`
-
-document.body.insertAdjacentHTML("beforeend", modal_template)
-document.querySelector("#portfolio h2").innerHTML += `<img src="/Group.png" alt=""><span id="modal_btn">Modifier</span>`
-document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
-  modal.classList.add("on")
-})
-// evenement sur la modale au click qui on enleve la class "on"
-modal.addEventListener('click', e => [
-  e.target.classList.remove("on")
-])
-
-function renderModalCards(projects) {
-  const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
-  
-  projects.forEach((item, i) => {
-    let figure = document.createElement('figure')
-    img = document.createElement('img')
-    const button = document.createElement('button');
-    button.className = 'fa-solid fa-trash-can'
-    button.classList.add('trash')
-    
-    button.addEventListener("click", () => {
-      fetch("http://localhost:5678/api/works/" + item.id, {
-        method: "DELETE",
-        headers: { "Authorization": "Bearer " + localStorage.token },
+      categoryBtn.addEventListener("mouseout",(event)=>{
+        event.target.style.background = "";
+      })
+      //creation d'evenement click qui selectionne toutes les figure dans .figure
+      categoryBtn.addEventListener("click", (event) => {
+        //alert (event.target)
+        const worksItem = document.querySelectorAll(".gallery figure")
+        //boucle pour que chaque element de workItem est supprime chaque style
+        worksItem.forEach(element => {
+          element.style = ""
+        })
+        //Boucle qui regarde tout les element de workItem
+        worksItem.forEach(element2 => {
+          //condition si l'element.id n'est pas égal à element2.dataset.categoryId ceci ne s'affiche pas 
+          if (element.id !== parseInt(element2.dataset.categoryid)) {
+            element2.style = "display : none"
+          }
+        });
       })
       
-      .then(response => {
-        if (response.ok) {
-          console.log("Travaux supprimer correctement");
-        } else {
-          console.error("Erreur travaux non supprimer", response.status);
-        }
+      div.append(categoryBtn);
+    });
+    
+    console.log(button)
+  }
+  
+  // variable qui integre du code html pour une modale et l'integres a l'index.html
+  const modal_template = `
+<aside id="modal"> 
+<div class ="modal-wrapper">
+<h1>Galerie photo</h1>
+<div class="modal-galerie">
+</div>
+</div>
+</aside>`
+  
+  document.body.insertAdjacentHTML("beforeend", modal_template)
+  document.querySelector("#portfolio h2").innerHTML += `<div class="btnModif"><img src="/Group.png" alt=""><span id="modal_btn">Modifier</span></div>`
+  const btnModif = document.querySelector(".btnModif")
+  if (localStorage.token){
+    
+  }else{
+    btnModif.style = "display : none";
+  }
+  document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
+    modal.classList.add("on")
+    if(classList !== on){
+      const modalwrapper = document.querySelector(".modal-wrapper")
+      modalwrapper.style = "display : none"
+    }
+  })
+  // evenement sur la modale au click qui on enleve la class "on"
+  modal.addEventListener('click', e => [
+    e.target.classList.remove("on")
+  ])
+
+  function renderModalCards(projects) {
+    const imageTravauxWrapper = document.querySelector(".modal-wrapper div");
+    
+    projects.forEach((item, i) => {
+      let figure = document.createElement('figure')
+      img = document.createElement('img')
+      const button = document.createElement('button');
+      button.className = 'fa-solid fa-trash-can'
+      button.classList.add('trash')
+      
+      button.addEventListener("click", () => {
+        fetch("http://localhost:5678/api/works/" + item.id, {
+          method: "DELETE",
+          headers: { "Authorization": "Bearer " + localStorage.token },
+        })
+        
+        .then(response => {
+          if (response.ok) {
+            console.log("Travaux supprimer correctement");
+          } else {
+            console.error("Erreur travaux non supprimer", response.status);
+          }
+        })
+        .catch(error => {
+          console.error("Erreur envoi de la requete DELETE", error);
+        });
       })
-      .catch(error => {
-        console.error("Erreur envoi de la requete DELETE", error);
-      });
+      
+      figure.setAttribute("data-categoryId", item.categoryId)
+      
+      img.src = item.imageUrl
+      
+      figure.append(button);
+      figure.append(img)
+      imageTravauxWrapper.append(figure)
+    })
+  }
+  
+  
+  
+  const ajoutBtn = document.createElement('button');
+  ajoutBtn.textContent = "Ajouter une photo";
+  ajoutBtn.classList.add('Ajout')
+  
+  // faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
+  ajoutBtn.addEventListener("click", (item,) => {
+    ajoutBtn.textContent = "Valider";
+    ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
+    ajoutBtn.style = 'display : none';
+    
+    
+    
+    const gallerieContainer = document.querySelector('.modal-galerie');
+    gallerieContainer.innerHTML = "";
+    
+    // j"essaie de rendre la galleriecntainer non visible plutot que de supprimer le contenu pour pouvoir le faire reapparaitre en cliquant sur la fleche
+    //gallerieContainer.style = "display : none"
+    gallerieContainer.classList.add("nouveau")
+    console.log(document.querySelector('.modal-galerie.nouveau'))
+    // document.querySelector('.modal-galerie.nouveau form').insertAdjacentHTML("after" ,ajoutPhotoTemplate)
+    //document.querySelector(".Ajout").addEventListener("click", (item, i) => {
+      event.preventDefault();
+    const titleH1 = document.querySelector('.modal-wrapper h1');
+    titleH1.textContent = "Ajout photo";
+    modal.classList.add("on")
+    
+    const btnValider = document.createElement('button');
+    btnValider.textContent = "Valider"
+    btnValider.classList.add("Valider")
+    btnValider.addEventListener("click", () => {
+      console.log("j'ai cliquer");
+      function champsValides() {
+        validerTitle()
+        validerCategories()
+      }
+      
+      function validerTitle(title) {
+        let titleRegExp = new RegExp("[a-z0-9._-]")
+        if (!titleRegExp.test(title)) {
+          throw new Error("Le titre n'est pas valide.")
+        }
+      }
+      
+      function validerCategories(categories) {
+        if (!categoriesSelect.value)
+          throw new Error("la category n'as pas été selectioneer")
+      }
+      
+      if (!champsValides()) {
+        console.log('Veuillez remplir tous les champs correctement.');
+        return;
+      }
+      else {
+        
+      }
     })
     
-    figure.setAttribute("data-categoryId", item.categoryId)
+    const flecheArriere = document.createElement("div");
+    flecheArriere.classList.add('fleche')
+    flecheArriere.innerHTML = '<i class="fa-solid fa-arrow-left"></i>'
+    flecheArriere.addEventListener("click", () => {
+      
+      const modal2 = document.querySelector(".modal-galerie.nouveau")
+      modal2.remove()
+      
+    //document.querySelector(".nouveau form").remove()
+      //document.querySelector(".nouveau").classList.remove("nouveau")
+      ajoutBtn.textContent = "Ajouter une photo";
+      titleH1.innerHTML = "Galerie photo";
+
+
+      
+    })
     
-    img.src = item.imageUrl
+    const croix = document.createElement("div");
+    croix.classList.add('croix')
+    croix.innerHTML = '<i class="fa-solid fa-x"></i>'
+    croix.addEventListener("click", () => {
+      const containerModal = document.getElementById("modal");
+      containerModal.classList.remove("on")
+      
+      
+    })
     
-    figure.append(button);
-    figure.append(img)
-    imageTravauxWrapper.append(figure)
-  })
-}
-
-
-
-const ajoutBtn = document.createElement('button');
-ajoutBtn.textContent = "Ajouter une photo";
-ajoutBtn.classList.add('Ajout')
-
-// faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
-ajoutBtn.addEventListener("click", (item,) => {
-  ajoutBtn.textContent = "Valider";
-  ajoutBtn.style = "background-color : #A7A7A7 ; border : white"
-  ajoutBtn.style = 'display : none';
-  
-  
-  
-  const gallerieContainer = document.querySelector('.modal-galerie');
-  gallerieContainer.innerHTML= "";
-  // j"essaie de rendre la galleriecntainer non visible plutot que de supprimer le contenu pour pouvoir le faire reapparaitre en cliquant sur la fleche
-  //gallerieContainer.style = "display : none"
-  gallerieContainer.classList.add("nouveau")
-  //document.querySelector(".Ajout").addEventListener("click", (item, i) => {
-    event.preventDefault();
-  const titleH1 = document.querySelector('.modal-wrapper h1');
-  titleH1.textContent = "Ajout photo";
-  modal.classList.add("on")
-  
-  const btnValider = document.createElement('button');
-  btnValider.textContent = "Valider" 
-  btnValider.classList.add("Valider")
-  btnValider.addEventListener("click", ()=>{
-    console.log("j'ai cliquer");
-    function champsValides(){
-      validerTitle()
-      validerCategories()
-    }
     
-    function validerTitle(title) {
-      let titleRegExp = new RegExp("[a-z0-9._-]")
-      if (!titleRegExp.test(title)) {
-        throw new Error("Le titre n'est pas valide.")
-      }
-    }
-
-    function validerCategories(categories){
-      if(!categoriesSelect.value)
-        throw new Error("la category n'as pas été selectioneer")
-    }
-
-    if (!champsValides()) {
-      console.log('Veuillez remplir tous les champs correctement.');
-      return;
-    }
-    else{
-
-    }
-  })
-  
-  const flecheArriere = document.createElement("div");
-  flecheArriere.classList.add('fleche')
-  flecheArriere.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
-  flecheArriere.addEventListener("click", ()=>{
+    const rechercheImages = document.createElement('div')
+    //rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
+    const ajoutPhotoTemplate = `
+ <label id="menu"> 
+ <img src="assets/icons/picture-svgrepo-com 1.png" alt="">
+ <input type="file" id="file-input" accept="image/jpeg, image/png, image/4mo , image/jpg"/>
+ <div class = divAjout >+ Ajouter photo</div>
+ <span class = spanAjout>
+ jpg, png : 4mo max
+ </span>
+ </label>`
     
-    const modal2 = document.getElementById('menu')
-    modal2.remove()
-    document.querySelector(".nouveau form").remove()
-    document.querySelector(".nouveau").classList.remove("nouveau")
-    ajoutBtn.textContent = "Ajouter une photo";
-    titleH1.innerHTML = "Galerie photo"
-
-  })
-  
-  const croix = document.createElement("div");
-  croix.classList.add('croix')
-  croix.innerHTML='<i class="fa-solid fa-x"></i>'
-  croix.addEventListener("click", ()=>{
-    const modalFermer = document.getElementById('modal');
-    modalFermer.classList.remove("on")
     
-    flecheArriere.click()
-  })
-  
-  
-  const rechercheImages = document.createElement('div')
-  //rechercheImages.insertAdjacentElement("beforebegin", gallerieContainer)
-  const ajoutPhotoTemplate = `
-    <label id="menu"> 
-      <img src="assets/icons/picture-svgrepo-com 1.png" alt="">
-      <input type="file" id="file-input" accept="image/jpeg, image/png, image/4mo , image/jpg"/>
-      <div class = divAjout >+ Ajouter photo</div>
-      <span class = spanAjout>
-        jpg, png : 4mo max
-      </span>
-    </label>`
-  
-  document.querySelector('.modal-wrapper h1').insertAdjacentHTML("afterend" ,ajoutPhotoTemplate)
-  
-  const fileInput =  document.getElementById('file-input');
-  fileInput.addEventListener('change', previewFile);
-  
-  function previewFile () {
-    // regex pour mettre en parametres jpeg et png
-    const fileRegex = /\.(jpeg|jpg|png)$/i;
-    
-    if (this.files.length === 0  || !fileRegex.
-      test(this.files[0].name)) {
+    function previewFile() {
+      // regex pour mettre en parametres jpeg et png
+      const fileRegex = /\.(jpeg|jpg|png)$/i;
+      
+      if (this.files.length === 0 || !fileRegex.test(this.files[0].name)) {
         return;
       }
       
@@ -332,13 +354,13 @@ ajoutBtn.addEventListener("click", (item,) => {
       file_reader.readAsDataURL(file);
       
       file_reader.addEventListener('load', (event) =>
-        displayImage(event,file));
+        displayImage(event, file));
       const divAjout = document.querySelector('.divAjout');
       divAjout.style = 'display : none';
       const spanAjout = document.querySelector('.spanAjout')
       spanAjout.style = 'display:none'
       
-    } 
+    }
     
     function displayImage(event, file) {
       const figureElement = document.createElement('figure');
@@ -354,8 +376,8 @@ ajoutBtn.addEventListener("click", (item,) => {
       
     }
     
-    const image = document.createElement('img');
-    rechercheImages.appendChild(image);
+    const _image = document.createElement('img');
+    rechercheImages.appendChild(_image);
     
     const btnContainer = document.querySelector('.modal-wrapper')
     btnContainer.insertAdjacentElement('afterend', rechercheImages);
@@ -383,7 +405,7 @@ ajoutBtn.addEventListener("click", (item,) => {
     
     const categoriesSelect = document.createElement('select');
     categoriesSelect.id = 'categoriesSelect';
-    categoriesSelect.name = 'categories';
+    categoriesSelect.name = 'category';
     
     
     
@@ -393,71 +415,67 @@ ajoutBtn.addEventListener("click", (item,) => {
     form.appendChild(btnValider);
     
     let title = form.title.value;
-    let categories = form.categories.value;
-    let imageForm = form.image;
-    console.log(categories)
-
+    let category = form.category.value;
+    let image = form.image;
+    console.log(category)
+    
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+      let form = event.target
       let formData = new FormData(form);
-     // formData.append("title", title);
-      //formData.append("category", categories);
-     // formData.append("image", image);
-
+      // formData.append("title", title);
+      //formData.append("category", category);
+      // formData.append("image", image);
       
-      console.log(imageForm)
-      console.log(categories)
-      console.log(title)
-
+      
+      console.log(form)
+      console.log(form.image)
+      console.log(form.category)
+      console.log(form.title)
+      console.log("Bearer " + localStorage.getItem("token"))
+      alert('ok')
+      
       const bodyContent = JSON.stringify({
-        image,title,categories
+        image, title, category
       })
       
       fetch("http://localhost:5678/api/works/", {
         method: "POST",
-        headers: {"Authorization": "Bearer " +  localStorage.getItem("token")},
-        body: bodyContent
-    })
-    .then(response => response.json())
-    .then(response => {
-      console.log(response.status);
-      console.log(response.statusText);
-      return response.json();
-    })
-    .then(data => {
+        headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
         console.log(data);
-        // si la data est ok, création d'image et implémentation dans le DOM
-        if (data.success) {
-            const imageUrl = imageForm;
-            console.log(imageUrl);
-
-            const galleryContainer = document.querySelector('.gallery');
-            let figure = document.createElement('figure');
-            let image = document.createElement('img');
-            image.src = imageUrl;
-    
-            figure.appendChild(image);
-            galleryContainer.appendChild(figure);
-    
-            const modalImg = document.querySelector('.modal-galerie');
-            figure = document.createElement('figure');
-            image = document.createElement('img');
-            image.src = imageUrl;
-    
-            figure.appendChild(image);
-            modalImg.appendChild(figure);
-    
-            console.log("Création effectuée");
-            console.log(data);
-        } else {
-            console.error("Erreur");
-        }
-    })
-    .catch(error => {
-        console.error("Une erreur s'est produite");
-        alert("Une erreur s'est produite");
-    });
-    
+        console.log('okpokokok')
+        const imageUrl = data.imageUrl;
+        console.log('okpokokok')
+        console.log(imageUrl);
+        
+        const galleryContainer = document.querySelector('.gallery');
+        let figure = document.createElement('figure');
+        let image = document.createElement('img');
+        image.src = imageUrl;
+        
+        figure.appendChild(image);
+        galleryContainer.appendChild(figure);
+        
+        const modalImg = document.querySelector('.modal-galerie');
+        figure = document.createElement('figure');
+        image = document.createElement('img');
+        image.src = imageUrl;
+        
+        figure.appendChild(image);
+        modalImg.appendChild(figure);
+        
+        console.log("Création effectuée");
+        console.log(data);
+      })
+      // .catch(error => {
+        // console.error("Une erreur s'est produite");
+      // alert("Une erreur s'est produite");
+      // });
+      
       
       
     });
@@ -467,9 +485,15 @@ ajoutBtn.addEventListener("click", (item,) => {
     btnContainer.appendChild(flecheArriere)
     btnContainer.appendChild(croix)
     
+    console.log(document.querySelector('.modal-galerie.nouveau'))
+    document.querySelector('.modal-galerie.nouveau form').insertAdjacentHTML("afterbegin" ,ajoutPhotoTemplate)
+    
+    const fileInput = document.getElementById('file-input');
+    fileInput.name="image"
+    fileInput.addEventListener('change', previewFile);
     
     
-    async function fillFormSelect(item,i){
+    async function fillFormSelect(item, i) {
       const url = `http://localhost:5678/api/categories`;
       const response = await fetch(url);
       const data = await response.json();
@@ -497,20 +521,21 @@ ajoutBtn.addEventListener("click", (item,) => {
   
   
   
-  const modal_template2 = `
-  <form id="FormulaireAjout">
-  <label for="username">Titre :</label>
-  <input type="text" id="Titre" required>
+  //const modal_template2 = `
+  //<form id="FormulaireAjout">
+  //<label for="username">Titre :</label>
+  //<input type="text" id="Titre" required>
   
-  <label for="Categories">Categories :</label>
-  <input type="text" id="Categories" required>
-      <button type="submit" class="Valider">Valider</button>     
-  </form>
-  `
-  const modalContainer = document.createElement('div');
-  modalContainer.insertAdjacentHTML('beforeend', modal_template2);
+  //<label for="Categories">Categories :</label>
+  //<input type="text" id="Categories" required>
+  //<button type="submit" class="Valider">Valider</button> 
+  //</form>
+  //`
+  //const modalContainer = document.createElement('div');
+  //modalContainer.setAttribute("hidden")
+  //modalContainer.insertAdjacentHTML('beforeend', modal_template2);
   //console.log(modalContainer)
-  document.body.appendChild(modalContainer);
+  //document.body.appendChild(modalContainer);
   
   // Gestion de l'événement Submit sur le formulaire
   let form = document.getElementById('FormulaireAjout');
@@ -532,6 +557,6 @@ ajoutBtn.addEventListener("click", (item,) => {
   
   // faut que j'essaie de supprimer ou mettre en commentaire ce que je'ai fais pour essayer de tout simplement reprendre la modaletemplate et la modifier comme par exemple gallery-wrapper je met form titre aisni de suite
   // c'est chiant mais faisable faut juste que mon cerveau soit organiser ainsi que mes idees pour que j'y arrive parce que en faite j'ai trop d'idee dans la tete 
-  //  bref ce soir objectif faire apparaitre l'espace vide avec un titre prenom et l'espace vide avec les categories 
+  // bref ce soir objectif faire apparaitre l'espace vide avec un titre prenom et l'espace vide avec les categories 
   // normalement ce que j'ai fais ça marche mais ça s'ouvre pas dans la modale 
   //document.body.insertAdjacentHTML("beforeend", modal_template2);
