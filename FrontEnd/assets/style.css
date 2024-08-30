@@ -1,10 +1,22 @@
 /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
+.Menu button{
+	border-radius: 60px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 13px;
+    padding-right: 13px;
+	border-color:  #1D6154;
+}
 
 .Menu {
-    width: 100%;
+	width: 100%;
+	gap: 10px;
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
 }
 
 h2{
@@ -12,64 +24,65 @@ h2{
 }
 
 button.Valider {
+	margin-left: 50px;
 	width: 237px;
-    height: 36px;
-    top: 1267px;
-    left: 600px;
-    gap: 0px;
-    border-radius: 60px 60px 60px 60px;
-    opacity: 0px;
-    background-color: #1D6154;
-    color: white;
-    margin-top: 1em;
-    font-size: 14px;
+	height: 36px;
+	top: 1267px;
+	left: 600px;
+	gap: 0px;
+	border-radius: 60px 60px 60px 60px;
+	opacity: 0px;
+	background-color: #1D6154;
+	color: white;
+	margin-top: 1em;
+	font-size: 14px;
 }
 
 
 
 ::before {
-    position: absolute;
-    top: 0;
-    right: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 label#menu {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
 	background-color: #E8F1F6;
 	padding: 15px;
 	/*gap: 1em;*/
 }
 
 label div {
-    border: solid;
-    padding: 7px 27px 7px 27px;
-    border-radius: 24px;
-    border-color: #CBD6DC;
-    background-color: #CBD6DC;
-    color: #306685;
+	border: solid;
+	padding: 7px 27px 7px 27px;
+	border-radius: 24px;
+	border-color: #CBD6DC;
+	background-color: #CBD6DC;
+	color: #306685;
 	margin-top: 1em;
 }
 
 select#categoriesSelect {
-    padding: 7px;
+	padding: 7px;
 	border: white;
-    box-shadow: 5px 6px 14px -3px darkgray;
+	box-shadow: 5px 6px 14px -3px darkgray;
 }
 
 label span {
-    font-size: 12px;
+	font-size: 12px;
 	margin-top: 7px;
 }
 
 label img {
-    width: 64px;
+	width: 64px;
 }
 
 .modal-wrapper input[type="file"] {
-    display: none;
+	display: none;
 }
 
 
@@ -78,26 +91,26 @@ label img {
 }
 
 input[type="text"] {
-    padding: 7px;
+	padding: 7px;
 	border: white;
-    box-shadow: 5px 6px 14px -3px darkgray;
+	box-shadow: 5px 6px 14px -3px darkgray;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 	width: 70%;
 	margin-top: 10em;
 }
 
 div.fleche {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: 1em;
-    font-size: 2em;
-    margin-top: 1em;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 1em;
+	font-size: 2em;
+	margin-top: 1em;
 }
 
 div.croix{
@@ -105,9 +118,9 @@ div.croix{
 	top: 1;
 	right: 0;
 	margin-right: 1em;
-    font-size: 1.3em;
-    margin-top: 1em;
-    top: 1em;
+	font-size: 1.3em;
+	margin-top: 1em;
+	top: 1em;
 }
 
 .modal-galerie.nouveau {
@@ -118,7 +131,7 @@ div.croix{
 }
 
 h2 img {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 h4 a {
@@ -130,8 +143,8 @@ h4 a {
 	width: 10px;
 	border: none;
 	position: absolute;
-    top: 0;
-    right: 0;
+	top: 0;
+	right: 0;
 }
 
 .Ajout {
@@ -151,8 +164,8 @@ h4 a {
 
 .MDP{
 	display: flex;
-    justify-content: center;
-    padding-top: 2em;
+	justify-content: center;
+	padding-top: 2em;
 }
 
 .on {
@@ -191,7 +204,7 @@ h4 a {
 	gap: 1em;
 	margin-bottom: 2em;
 	width: 100%;
-
+	
 }
 
 span#modal_btn {
@@ -399,7 +412,7 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	
 }
 
 nav li {
@@ -445,7 +458,6 @@ li:hover {
 	justify-content: center;
 	align-items: center;
 	font-size: 2em;
-	margin-left: 2em;
 }
 
 .gallery {
@@ -458,7 +470,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
+	
 }
 
 #contact {
@@ -468,7 +480,7 @@ li:hover {
 
 #contact>* {
 	text-align: center;
-
+	
 }
 
 #contact h2 {
