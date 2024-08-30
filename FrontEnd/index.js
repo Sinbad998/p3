@@ -173,7 +173,7 @@ async function categories() {
   
   // variable qui integre du code html pour une modale et l'integres a l'index.html
   const modal_template = `
-<aside id="modal"> 
+<aside id="modal" style="visibility:hidden"> 
 <div class ="modal-wrapper">
 <h1>Galerie photo</h1>
 <div class="modal-galerie">
@@ -185,16 +185,17 @@ async function categories() {
   document.querySelector("#portfolio h2").innerHTML += `<div class="btnModif"><img src="/Group.png" alt=""><span id="modal_btn">Modifier</span></div>`
   const btnModif = document.querySelector(".btnModif")
   if (localStorage.token){
-    
+    const aside = document.getElementById('modal');
+    aside.style = "visibilty:visible"
   }else{
     btnModif.style = "display : none";
   }
   document.querySelector("#portfolio h2 span").addEventListener("click", (item, i) => {
     modal.classList.add("on")
-    if(classList !== on){
-      const modalwrapper = document.querySelector(".modal-wrapper")
-      modalwrapper.style = "display : none"
-    }
+    //if(!classList.contains('on')){
+      //const modalwrapper = document.querySelector(".modal-wrapper")
+      //modalwrapper.style = "display : none"
+    //}
   })
   // evenement sur la modale au click qui on enleve la class "on"
   modal.addEventListener('click', e => [
