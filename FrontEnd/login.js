@@ -34,3 +34,20 @@ form.addEventListener("submit", (event) => {
 
 })
 
+
+
+
+
+function validerTitre(title) {
+    if (title.length < 2) {
+      throw new Error("Le titre est trop court.");
+      }
+    }
+  
+    
+  function validerCategories(categoriesSelect) {
+    if (!categoriesSelect.value) {
+      throw new Error("Veuillez sélectionner au moins une catégorie.");
+      }
+    }
+

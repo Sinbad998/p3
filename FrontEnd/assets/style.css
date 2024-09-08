@@ -2,6 +2,36 @@
 v2.0 | 20110126
 License: none (public domain)
 */
+
+/*button.Valid{
+	background-color :#1D6154 
+} */
+
+
+
+button.apresfleche{
+	width: 237px;
+    height: 36px;
+    top: 1267px;
+    left: 600px;
+    gap: 0px;
+    border-radius: 60px 60px 60px 60px;
+    opacity: 0px;
+    background-color: #1D6154;
+    color: white;
+    margin-top: 1em;
+    font-size: 14px;
+}
+
+
+
+
+.Menu button:hover{
+	background-color: #1D6154;
+	color: white;
+}
+
+
 .Menu button{
 	border-radius: 60px;
     padding-top: 4px;
@@ -23,7 +53,7 @@ h2{
 	flex-wrap: wrap;
 }
 
-button.Valider {
+button#Valider {
 	margin-left: 50px;
 	width: 237px;
 	height: 36px;
@@ -32,18 +62,27 @@ button.Valider {
 	gap: 0px;
 	border-radius: 60px 60px 60px 60px;
 	opacity: 0px;
-	background-color: #1D6154;
+	background-color: #A7A7A7;
 	color: white;
 	margin-top: 1em;
 	font-size: 14px;
+	border-color: #A7A7A7;
 }
 
 
 
-::before {
+i.fa-solid.fa-arrow-left::before {
+	position: absolute;
+	top: 0;
+	/*right: 0;*/
+	font-size: 25px;
+}
+
+i.fa-solid.fa-x::before{
 	position: absolute;
 	top: 0;
 	right: 0;
+	font-size: 15px;
 }
 
 label#menu {
@@ -69,7 +108,8 @@ label div {
 select#categoriesSelect {
 	padding: 7px;
 	border: white;
-	box-shadow: 5px 6px 14px -3px darkgray;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	margin-bottom: 4em;
 }
 
 label span {
@@ -93,7 +133,7 @@ label img {
 input[type="text"] {
 	padding: 7px;
 	border: white;
-	box-shadow: 5px 6px 14px -3px darkgray;
+	box-shadow: 0px 4px 14px 0px #00000017;
 }
 
 form {
@@ -184,6 +224,7 @@ h4 a {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1em;
+	border-radius: 10px 10px 10px 10px;
 }
 
 .modal-wrapper h1 {
@@ -617,9 +658,9 @@ form button {
 	align-items: center;
 }
 
-.modal {
+aside#modal {
 	position: fixed;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	top: 0;
