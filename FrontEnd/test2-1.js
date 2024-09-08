@@ -424,31 +424,31 @@ async function categories() {
       .then(response => response.json())
       .then(data => {
 
-        const imageUrl = data.imageUrl;
-        console.log(imageUrl);
+        // const imageUrl = data.imageUrl;
+        // console.log(imageUrl);
         
-        const galleryContainer = document.querySelector('.gallery');
-        let figure = document.createElement('figure');
-        let image = document.createElement('img');
-        image.src = imageUrl;
+        // const galleryContainer = document.querySelector('.gallery');
+        // let figure = document.createElement('figure');
+        // let image = document.createElement('img');
+        // image.src = imageUrl;
         
-        figure.appendChild(image);
-        galleryContainer.appendChild(figure);
+        // figure.appendChild(image);
+        // galleryContainer.appendChild(figure);
         
-        const modalImg = document.querySelector('.modal-galerie');
-        figure = document.createElement('figure');
-        image = document.createElement('img');
-        image.src = imageUrl;
+        // const modalImg = document.querySelector('.modal-galerie');
+        // figure = document.createElement('figure');
+        // image = document.createElement('img');
+        // image.src = imageUrl;
         
-        figure.appendChild(image);
-        modalImg.appendChild(figure);
+        // figure.appendChild(image);
+        // modalImg.appendChild(figure);
         
-        console.log("Création effectuée");
-        console.log(data);
+        // console.log("Création effectuée");
         // console.log(data);
-        // console.log("Voici l'image ajouter", data)
-        // renderModalCards(projects)
-        // renderCards(projects)
+        console.log(data);
+        console.log("Voici l'image ajouter", data)
+        renderModalCards(projects)
+        renderCards(projects)
       })      
       
     });
