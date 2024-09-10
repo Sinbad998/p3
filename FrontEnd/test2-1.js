@@ -1,7 +1,7 @@
 //ne pas afficher ce quil ya dan la premiere modale pour afficher ce quil ya dans la seconde modale
 //faudra juste chaange le contenu de la modale et garder le titre et le bouton ainsi que rajouter un bouton fleche 
 //arriere pour revenir en arriere et une croix 
-
+console.log("hello tout le monde")
 window.addEventListener("load", (event) => {
   //si le token du localstorage est vrai alors effacer le menu
   if (localStorage.token) {
@@ -218,6 +218,7 @@ async function categories() {
     })
   }
 
+  // Faire disparaitre la modale au click en dehors du carré
   const containerModal = document.getElementById("modal");
   containerModal.addEventListener("click", (e)=>{
   
@@ -226,11 +227,10 @@ async function categories() {
     }
   })
 
-  // Faire disparaitre la modale au click en dehors du carré
   const ajoutBtn = document.createElement('button');
   ajoutBtn.textContent = "Ajouter une photo";
   ajoutBtn.classList.add('Ajout')
-  
+
   // faire disparaitre la modale pour ensuite en faire apparaitre une nouvelle
   ajoutBtn.addEventListener("click", (item,) => {
     ajoutBtn.style = 'display : none';
@@ -408,7 +408,7 @@ async function categories() {
     let image = form.image;
     
     form.addEventListener('submit', (event) => {
-      //event.preventDefault();
+      event.preventDefault();
       let form = event.target
       let formData = new FormData(form);
       
@@ -448,6 +448,7 @@ async function categories() {
         console.log(data);
         console.log("Voici l'image ajouter", data)
         renderModalCards(projects)
+        console.log(renderModalCards(projects))
         renderCards(projects)
       })      
       
