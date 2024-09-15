@@ -1,0 +1,669 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin: auto;
+	font-family: 'Work Sans';
+	font-size: 14px;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+section {
+	margin: 50px 0
+}
+
+h1:not(.modal h1) {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1>span {
+	font-family: 'Work Sans';
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	;
+}
+
+h2:not(.modal h2) {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+	
+}
+
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+#introduction {
+	display: flex;
+	align-items: center;
+}
+
+#introduction figure {
+	flex: 1
+}
+
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+
+#portfolio h2 {
+	text-align: center;
+	margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+}
+
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+	height: 489px;
+}
+
+#contact {
+	width: 50%;
+	margin: auto;
+}
+
+#contact>* {
+	text-align: center;
+	
+}
+
+#contact h2 {
+	margin-bottom: 20px;
+}
+
+#contact form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+a {
+	border: none;
+}
+
+/*formulaire*/
+
+
+#FormulaireLogin {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	gap: 1em;
+	margin: 0 auto;
+	align-items: center;
+}
+
+input#email {
+	padding: 1em;
+	border: white;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	width: 100%;
+}
+
+input#password {
+	padding: 1em;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border: white;
+	width: 100%;
+}
+
+label {
+	display: flex;
+	width: 100%;
+}
+
+main h1:not(.modal h1) {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 35px;
+	font-weight: 700;
+	color: green;
+	justify-content: center;
+	margin-left: 465px;
+	margin-bottom: 1em;
+}
+
+main h2 {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+
+h2:not(.modal h2) {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+}
+
+main h3:not(.modal h3) {
+	margin-top: 2em;
+	margin-left: 440px;
+	color: black;
+}
+
+main h3:not(.login h3) {
+	margin-top: 2em;
+	margin-left: 440px;
+	color: black;
+}
+
+h3 a {
+	color: black;
+	margin-left: 15px;
+}
+
+form#FormulaireLogin button {
+	border-radius: 60px 60px 60px 60px;
+	margin-top: 1em;
+	background-color: #1D6154;
+	color: whitesmoke;
+	width: 179px;
+	justify-content: center;
+	height: 36px;
+	border: none;
+}
+
+.MDP {
+	display: flex;
+	justify-content: center;
+	padding-top: 2em;
+}
+
+h4 a {
+	color: black;
+}
+
+/*fin formulaire*/
+
+/* 1ere Modale */
+.modeedition {
+	/*position: fixed;*/
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3em;
+	/* bottom: 0; */
+	background-color: black;
+	color: white;
+	/* text-align: center; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+
+.modalProjet {
+	max-width: calc(120vh - 10px);
+	max-height: calc(100vh - 20px);
+	width: 600px;
+	overflow: auto;
+	padding: 45px;
+	background-color: #fff;
+	justify-content: center;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.modalProjet h1 {
+    padding: 10px;
+    justify-content: center;
+    font-size: 1.5em;
+    display: flex;
+    color: black;
+    font-family: Work Sans;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 30.5px;
+    text-align: center;
+}
+
+.fa-xmark{
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.modalProjet button{
+	background-color: #1D6154;
+	color: whitesmoke;
+	padding: 5px 10px;
+	border-radius: 25px;
+	cursor: pointer;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.modalGalerie {
+	flex-wrap: wrap;
+	display: flex;
+	gap: 1em;
+	margin-bottom: 2em;
+	width: 100%;
+	
+}
+
+.modalGalerie figure img {
+	width: 90px;
+	flex-wrap: wrap;
+	height: 120px;
+}
+
+.modal1 a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*fin de la 1ere modale*/
+
+/*2eme modale*/
+.modalAjout{
+	display: none;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.fa-arrow-left{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.modalAjout .Ajout h2 {
+	padding: 10px;
+	justify-content: center;
+	font-size: 1.5em;
+	display: flex;
+	color: black;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 30.5px;
+	text-align: center;
+	
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 80%;
+	width: 80%;
+	gap: 1em;
+}
+
+form .fileInput{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	background-color: #E8F1F6;
+	padding: 15px;
+	gap: 8px;
+}
+
+form span .fa-image {
+	font-size: 64px;
+}
+
+form img {
+	width: 64px;
+	display: none;
+}
+
+form .fileInput label{
+	border: solid;
+	padding: 7px 27px 7px 27px;
+	border-radius: 24px;
+	border-color: #CBD6DC;
+	background-color: #CBD6DC;
+	color: #306685;
+	margin-top: 1em;
+	width: 60%;
+	justify-content: center;
+}
+
+form .fileInput input{
+	display: none;
+}
+
+input#title {
+	padding: 7px;
+	border: white;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	width: 100%;
+}
+
+select#category {
+	padding: 7px;
+	border: white;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+
+
+.Ajout {
+	max-width: calc(120vh - 10px);
+	max-height: calc(100vh - 20px);
+	overflow: auto;
+	padding: 45px;
+	background-color: #fff;
+	justify-content: center;
+	position: relative;
+	justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.modalAjout form button{
+	border-radius: 60px 60px 60px 60px;
+	margin-top: 1em;
+	background-color: #A7A7A7;
+	color: whitesmoke;
+	width: 179px;
+	justify-content: center;
+	height: 36px;
+	margin-left: 85px;
+	border: none;
+}
+
+.modalAjout form .valid{
+	background-color:#1D6154;
+}
+
+/*fin de la 2eme modale*/
+.Menu {
+	display: none;
+	gap: 1em;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+
+.Menu button {
+	border-radius: 60px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 13px;
+	padding-right: 13px;
+	border-color: #1D6154;
+}
+
+.Menu button:hover{
+	background-color: #1D6154;
+	color: white;
+}
+
+
+span#modal_btn {
+	color: grey;
+	margin-left: 5px;
+	font-size: 11px;
+}
+
+h2 {
+	gap: 0.5em;
+}
+
+figure {
+	position: relative;
+}
+
+.fa-trash-can {
+	background-color: black;
+	color: white;
+	font-weight: 900;
+	font-size: 13px;
+}
+
+.modalGalerie figure span {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
