@@ -35,7 +35,6 @@ form.addEventListener("submit", (event) => {
             // si le token n'est pas bon envoi un message d'erreur
             else alert("erreur: mauvaise authentification")
         })
-    //.catch(e=>{alert("erreur: mauvaise authentification")})
 
 })
 

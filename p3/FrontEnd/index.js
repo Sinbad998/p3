@@ -18,7 +18,6 @@ window.addEventListener("load", (event) => {
       location.href = ""
     })
 
-    
     //// variable qui integre du code html pour la modale et l'integre a l'index.html
     const modal_template = `
     <aside class="modal" > 
