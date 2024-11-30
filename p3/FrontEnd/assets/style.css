@@ -148,7 +148,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin-top: 70px
 }
 
 section {
@@ -401,7 +401,7 @@ h4 a {
 
 /* 1ere Modale */
 .modeedition {
-	/*position: fixed;*/
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -465,11 +465,10 @@ h4 a {
 .modalProjet button{
 	background-color: #1D6154;
 	color: whitesmoke;
-	padding: 5px 10px;
+	padding: 10px 20px;
 	border-radius: 25px;
 	cursor: pointer;
-	padding-left: 2em;
-	padding-right: 2em;
+	border: 1px solid;
 }
 
 .modalGalerie {
@@ -547,6 +546,7 @@ form .fileInput{
 	background-color: #E8F1F6;
 	padding: 15px;
 	gap: 8px;
+	cursor: pointer;
 }
 
 
@@ -569,6 +569,7 @@ form .fileInput label{
 	margin-top: 1em;
 	width: 60%;
 	justify-content: center;
+	cursor: pointer;
 }
 
 form .fileInput input{
@@ -621,19 +622,25 @@ select#category {
 
 /*fin de la 2eme modale*/
 .Menu {
-	display: none;
+	display: flex;
 	gap: 1em;
 	justify-content: center;
 	margin-bottom: 1em;
 }
 
 .Menu button {
-	border-radius: 60px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 13px;
-	padding-right: 13px;
-	border-color: #1D6154;
+	border-radius: 25px;
+    padding-right: 13px;
+    border-color: #1D6154;
+    font-family: "'Syne'";
+    padding: 10px 20px;
+    border: 1px solid #1D6154;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #1D6154;
+    margin: 0px 6px;
+	margin-bottom: 30px;
 }
 
 .Menu button:hover{
@@ -659,8 +666,7 @@ figure {
 .fa-trash-can {
 	background-color: black;
 	color: white;
-	font-weight: 900;
-	font-size: 13px;
+	padding: 2px;
 }
 
 .modalGalerie figure span {
