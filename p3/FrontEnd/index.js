@@ -318,6 +318,10 @@ async function previewCategoryBtn(){
     btn.classList.add("filtres")
     menu.appendChild(btn)
   });
+
+  if(localStorage.token){
+    menu.style.display= "none"
+  }
 }
 previewCategoryBtn()
 
